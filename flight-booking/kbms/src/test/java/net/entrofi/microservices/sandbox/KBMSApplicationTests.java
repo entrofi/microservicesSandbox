@@ -19,7 +19,7 @@ import static junit.framework.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HateoasApplicationTests {
+public class KBMSApplicationTests {
 
     private static final String HOST = "http://localhost:8080";
 
@@ -51,7 +51,7 @@ public class HateoasApplicationTests {
          */
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setUsername("user");
-        resource.setPassword("password");
+        resource.setPassword("pass");
         resource.setAccessTokenUri(HOST + "/oauth/token");
         resource.setClientId("oauthclient");
         resource.setClientSecret("oauthclientsecret");

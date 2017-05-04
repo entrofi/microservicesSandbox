@@ -24,3 +24,4 @@ nbdist/
 .nb-gradle/
 /.mvn/
 /customer-service/.mvn/
+/flight-booking/kbms/src/generated-sources/
