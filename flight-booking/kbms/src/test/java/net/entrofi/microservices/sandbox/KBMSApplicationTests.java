@@ -1,6 +1,6 @@
 package net.entrofi.microservices.sandbox;
 
-import net.entrofi.microservices.sandbox.model.Greeting;
+import net.entrofi.microservices.sandbox.kbms.domain.model.Greeting;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

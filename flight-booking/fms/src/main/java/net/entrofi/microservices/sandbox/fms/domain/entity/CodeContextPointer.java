@@ -1,4 +1,4 @@
-package net.entrofi.microservices.sandbox.kbms.domain.model;
+package net.entrofi.microservices.sandbox.fms.domain.entity;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -20,18 +20,20 @@ public class CodeContextPointer {
         public static final String CODE_CONTEXT = "codeContext";
     }
 
+    public enum CodeContext {
+        ICAO, IATA
+    }
     @NotNull
     private String code;
 
     @NotNull
     private String codeContext;
 
-
-    public CodeContextPointer(){
+    public CodeContextPointer() {
 
     }
 
-    public CodeContextPointer(String code, String codeContext){
+    public CodeContextPointer(@NotNull String code, @NotNull String codeContext){
         this.code = code;
         this.codeContext = codeContext;
     }
@@ -49,5 +51,21 @@ public class CodeContextPointer {
 
     public void setCodeContext(String codeContext) {
         this.codeContext = codeContext;
+    }
+
+    @Override
+    public String toString() {
+        return "code: " + code + ", context: " + codeContext;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        CodeContextPointer that = (CodeContextPointer) obj;
+        if(obj != null) {
+            return code.equals((that.getCode())) && codeContext.equals(that.getCodeContext());
+        } else {
+            return false;
+        }
+
     }
 }

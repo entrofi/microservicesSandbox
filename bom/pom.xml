@@ -19,7 +19,7 @@
         <logback.version>1.0.13</logback.version>
         <org.springframework.version>4.2.1.RELEASE</org.springframework.version>
         <aspectjweaver.version>1.8.2</aspectjweaver.version>
-        <spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
+        <spring-data-jpa.version>1.11.3.RELEASE</spring-data-jpa.version>
         <cglib.version>2.2</cglib.version>
         <mysql-connector-java.version>5.1.9</mysql-connector-java.version>
         <hibernate.version>4.3.8.Final</hibernate.version>

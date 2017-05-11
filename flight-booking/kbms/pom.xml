@@ -11,12 +11,14 @@
 
     <groupId>net.entrofi.microservices.sandbox.flightbooking</groupId>
     <artifactId>kbms</artifactId>
-
+    <name>Knowledge Base Management</name>
+    <description>Knowledge Base Management System</description>
     <properties>
         <apt-maven-plugin.version>1.1.2</apt-maven-plugin.version>
         <querydsl.version>3.6.6</querydsl.version>
-        <working.dir>${project.basedir}</working.dir>
         <spring-boot.version>1.5.2.RELEASE</spring-boot.version>
+
+        <working.dir>${project.basedir}</working.dir>
     </properties>
 
     <build>

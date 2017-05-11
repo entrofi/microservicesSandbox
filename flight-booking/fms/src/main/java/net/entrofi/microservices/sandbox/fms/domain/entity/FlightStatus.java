@@ -1,13 +1,16 @@
-package net.entrofi.microservices.sandbox.kbms.domain.model;
+package net.entrofi.microservices.sandbox.fms.domain.entity;
 
-import net.entrofi.microservices.sandbox.kbms.domain.model.base.BaseInfoEntity;
-import org.hibernate.envers.Audited;
+import net.entrofi.microservices.sandbox.fms.domain.entity.base.BaseInfoEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Audited
 @Table(name="FMS_FLIGHT_STATUS", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"CODE", "CODE_SET"}, name = "FMS_FLIGHT_STAT_CODE_CODE_SET_U")
 })

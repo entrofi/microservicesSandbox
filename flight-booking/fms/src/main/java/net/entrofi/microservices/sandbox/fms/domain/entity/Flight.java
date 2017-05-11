@@ -1,12 +1,22 @@
-package net.entrofi.microservices.sandbox.kbms.domain.model;
+package net.entrofi.microservices.sandbox.fms.domain.entity;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 import java.time.Duration;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * TODO Note that this entity is not audited because Hibernate envers currently does not support EmbeddedIds with nested Embeddable fields.
@@ -19,10 +29,6 @@ import java.util.Date;
 @Table(name="FMS_FLIGHT")
 public class Flight {
 
-    public enum DepartureArrival{
-        DEPARTURE,ARRIVAL
-    }
-
     public enum FlightCategory{
         INTERNATIONAL, DOMESTIC
     }
@@ -32,18 +38,8 @@ public class Flight {
     private FlightId id;
 
 
-    @NotEmpty(message = "{aero.tav.tams.fms.domain.entity.commons.error.name.empty}")
-    @Pattern(message="{aero.tav.tams.fms.domain.entity.Flight.error.validation.codeFormat}", regexp = "[A-Z]{3,4}\\b")
-    @Column(nullable = false)
-    private String systemAirport;
-
-    @Pattern(message="{aero.tav.tams.fms.domain.entity.Flight.error.validation.codeFormat}", regexp = "[A-Z0-9]{0,7}\\b")
+    @Pattern(message="{net.entrofi.microservices.sandbox.fms.domain.entity.Flight.error.validation.codeFormat}", regexp = "[A-Z0-9]{0,7}\\b")
     private String callSign;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private DepartureArrival departureArrival;
-
 
     private Boolean arrivalSecurityCheck;
 
@@ -75,7 +71,7 @@ public class Flight {
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualTimeArrival;
 
-    @Pattern(message="{aero.tav.tams.fms.domain.entity.flight.error.validation.overMidnightIndicatorFormat}", regexp = "[1-9]{1}\\b")
+    @Pattern(message="{net.entrofi.microservices.sandbox.fms.domain.entity.flight.error.validation.overMidnightIndicatorFormat}", regexp = "[1-9]{1}\\b")
     @Column(name = "MIDNIGHT_IND", length = 1)
     private String overMidnightIndicator;
 
@@ -95,6 +91,13 @@ public class Flight {
     @JoinColumn(name = "PUB_STATUS")
     private FlightStatus  publicStatus;
 
+    @ManyToMany
+    private Set<Crew> crews = new HashSet<>();
+
+
+    @ManyToOne(optional = false)
+    private Aircraft aircraft;
+
 
     public FlightId getId() {
         return id;
@@ -104,28 +107,12 @@ public class Flight {
         this.id = id;
     }
 
-    public String getSystemAirport() {
-        return systemAirport;
-    }
-
-    public void setSystemAirport(String systemAirport) {
-        this.systemAirport = systemAirport;
-    }
-
     public String getCallSign() {
         return callSign;
     }
 
     public void setCallSign(String callSign) {
         this.callSign = callSign;
-    }
-
-    public DepartureArrival getDepartureArrival() {
-        return departureArrival;
-    }
-
-    public void setDepartureArrival(DepartureArrival departureArrival) {
-        this.departureArrival = departureArrival;
     }
 
     public Boolean getArrivalSecurityCheck() {
@@ -245,5 +232,22 @@ public class Flight {
 
     public void setPublicStatus(FlightStatus publicStatus) {
         this.publicStatus = publicStatus;
+    }
+
+
+    public Set<Crew> getCrews() {
+        return crews;
+    }
+
+    public void setCrews(Set<Crew> crews) {
+        this.crews = crews;
+    }
+
+    public Aircraft getAircraft() {
+        return aircraft;
+    }
+
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
     }
 }

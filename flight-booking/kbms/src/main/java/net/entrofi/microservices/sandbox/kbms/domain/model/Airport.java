@@ -38,7 +38,7 @@ public class Airport extends BaseInfoEntity {
     private String icaoCode;
 
     @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
-    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.City.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
+    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Division.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
     @NotNull
     @Size(min = 3, max = 3, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airport.error.validation.codeFormat}")
     @Column(unique=true, nullable=false)
@@ -55,7 +55,7 @@ public class Airport extends BaseInfoEntity {
     private String description;
 
     @ManyToOne
-    private City city;
+    private Division division;
 
 
     public String getIcaoCode() {
@@ -90,12 +90,12 @@ public class Airport extends BaseInfoEntity {
         this.description = description;
     }
 
-    public City getCity() {
-        return city;
+    public Division getDivision() {
+        return division;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setDivision(Division division) {
+        this.division = division;
     }
 
     public Status getStatus() {

@@ -72,12 +72,8 @@ public class Country extends BaseInfoEntity {
 	private Region region;
 	
 	@OneToMany(mappedBy="country")
-	@JsonBackReference("states")
-	private Set<State> states = new HashSet<State>();
-	
-	@OneToMany(mappedBy="country")
 	@JsonBackReference
-	private Set<City> cities = new HashSet<City>();
+	private Set<Division> cities = new HashSet<Division>();
 
 	public String getCode() {
 		return code;
@@ -115,22 +111,13 @@ public class Country extends BaseInfoEntity {
 		this.region = region;
 	}
 
-	@XmlTransient
-	public Set<State> getStates() {
-		return states;
-	}
-
-	public void setStates(Set<State> states) {
-		this.states = states;
-	}
-
 
 	@XmlTransient
-	public Set<City> getCities() {
+	public Set<Division> getCities() {
 		return cities;
 	}
 
-	public void setCities(Set<City> cities) {
+	public void setCities(Set<Division> cities) {
 		this.cities = cities;
 	}
 }

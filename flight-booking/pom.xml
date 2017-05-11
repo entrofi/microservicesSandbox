@@ -61,5 +61,6 @@
         <module>flight-search</module>
         <module>booking</module>
         <module>fms</module>
+        <module>web</module>
     </modules>
 </project>

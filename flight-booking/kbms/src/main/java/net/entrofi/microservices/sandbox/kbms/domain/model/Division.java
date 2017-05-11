@@ -20,6 +20,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /*******************************************************************************
- * City
+ * Division
  *
  *
  *
@@ -40,14 +41,18 @@ import java.util.Set;
  ******************************************************************************/
 @Audited
 @Entity
-@Table(name = "KBMS_CITY")
-public class City extends BaseInfoEntity {
+@Table(name = "KBMS_DIVISION")
+public class Division extends BaseInfoEntity {
+
+	public enum DivisionType {
+		DISTRICT, STATE, PROVINCE, CITY, ADMINISTRATIVE_REGION, COUNTY
+	}
 
 
 	@NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
-	@Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.City.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
+	@Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Division.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
 	@NotNull
-	@Size(min = 3, max = 3, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.City.error.validation.codeFormat}")
+	@Size(min = 3, max = 3, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Division.error.validation.codeFormat}")
 	@Column(unique=true, nullable=false)
 	private String code;
 
@@ -62,11 +67,20 @@ public class City extends BaseInfoEntity {
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Country country;
 
+
 	@ManyToOne
-	private State state;
+	@JoinColumn(name = "PARENT_ID")
+	private Division parentDivision;
+
+	@OneToMany
+	private Set<Division> subDivisions = new HashSet<>();
 
 	@OneToMany
 	private Set<Airport> airports = new HashSet<>();
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private DivisionType type;
 
 
 	public String getCode() {
@@ -101,12 +115,20 @@ public class City extends BaseInfoEntity {
 		this.country = country;
 	}
 
-	public State getState() {
-		return state;
+	public Division getParentDivision() {
+		return parentDivision;
 	}
 
-	public void setState(State state) {
-		this.state = state;
+	public void setParentDivision(Division parentDivision) {
+		this.parentDivision = parentDivision;
+	}
+
+	public Set<Division> getSubDivisions() {
+		return subDivisions;
+	}
+
+	public void setSubDivisions(Set<Division> subDivisions) {
+		this.subDivisions = subDivisions;
 	}
 
 	public Set<Airport> getAirports() {
@@ -115,5 +137,13 @@ public class City extends BaseInfoEntity {
 
 	public void setAirports(Set<Airport> airports) {
 		this.airports = airports;
+	}
+
+	public DivisionType getType() {
+		return type;
+	}
+
+	public void setType(DivisionType type) {
+		this.type = type;
 	}
 }

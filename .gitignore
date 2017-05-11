@@ -25,3 +25,4 @@ nbdist/
 /.mvn/
 /customer-service/.mvn/
 /flight-booking/kbms/src/generated-sources/
+/**/*/generated-sources/
