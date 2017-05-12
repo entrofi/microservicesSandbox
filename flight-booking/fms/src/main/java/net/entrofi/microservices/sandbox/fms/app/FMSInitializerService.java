@@ -6,17 +6,18 @@
  * of it without the prior written consent of Monitise Group Limited.
  * Any reproduction of this material must contain this notice.
  */
-package net.entrofi.microservices.sandbox.fms.config;
+package net.entrofi.microservices.sandbox.fms.app;
 
 
 import net.entrofi.microservices.sandbox.fms.domain.entity.Aircraft;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Crew;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Flight;
 import net.entrofi.microservices.sandbox.fms.domain.entity.FlightId;
-import net.entrofi.microservices.sandbox.fms.domain.model.Airport;
+import net.entrofi.microservices.sandbox.fms.env.model.Airport;
 import net.entrofi.microservices.sandbox.fms.domain.repository.AircraftRepository;
 import net.entrofi.microservices.sandbox.fms.domain.repository.CrewRepository;
 import net.entrofi.microservices.sandbox.fms.domain.repository.FlightRepository;
+import net.entrofi.microservices.sandbox.fms.service.FlightQueuePublisher;
 import net.entrofi.microservices.sandbox.fms.service.KBMSConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -46,6 +46,9 @@ public class FMSInitializerService {
 
     @Autowired
     private KBMSConsumerService kbmsConsumerService;
+
+    @Autowired
+    private FlightQueuePublisher flightQueuePublisher;
 
     private List<Airport> airports;
 
@@ -113,6 +116,7 @@ public class FMSInitializerService {
             flight.setCrews(fetchCrewsForFlight());
             flight.setAircraft(aircrafts.get(ThreadLocalRandom.current().nextInt(aircrafts.size())));
             flightRepository.save(flight);
+            flightQueuePublisher.send(flight);
         }
     }
 

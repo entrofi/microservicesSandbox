@@ -2,16 +2,11 @@
 package net.entrofi.microservices.sandbox.fms.service;
 
 
-import net.entrofi.microservices.sandbox.fms.domain.model.Airport;
-import net.entrofi.microservices.sandbox.fms.domain.model.BaseServiceListResponse;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import net.entrofi.microservices.sandbox.fms.env.model.Airport;
+import net.entrofi.microservices.sandbox.fms.env.model.BaseServiceListResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 
 @Component

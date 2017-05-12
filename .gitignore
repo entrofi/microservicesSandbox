@@ -26,3 +26,6 @@ nbdist/
 /customer-service/.mvn/
 /flight-booking/kbms/src/generated-sources/
 /**/*/generated-sources/
+flight-booking/kbms/mvnw
+hateoas/mvnw
+notification-service/mvnw

@@ -6,7 +6,7 @@
  * of it without the prior written consent of Monitise Group Limited.
  * Any reproduction of this material must contain this notice.
  */
-package net.entrofi.microservices.sandbox.fms.config;
+package net.entrofi.microservices.sandbox.fms.app;
 
 
 import org.springframework.context.annotation.Configuration;

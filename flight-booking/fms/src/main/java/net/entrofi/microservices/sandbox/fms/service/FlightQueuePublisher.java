@@ -1,0 +1,30 @@
+
+package net.entrofi.microservices.sandbox.fms.service;
+
+
+import net.entrofi.microservices.sandbox.fms.FMSApplication;
+import net.entrofi.microservices.sandbox.fms.domain.entity.Flight;
+import net.entrofi.microservices.sandbox.fms.env.model.FlightMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class FlightQueuePublisher {
+
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlightQueuePublisher.class);
+    @Autowired
+    private RabbitMessagingTemplate rabbitMessagingTemplate;
+
+    public void send(Flight flight) {
+        LOGGER.info("Sending flight to the queue..." + flight.getId().toString());
+        FlightMessage flightMessage = new FlightMessage(flight.getId().getFlightNumber(),
+                flight.getId().getOriginDate(),
+                flight.getId().getDepartureAirportCode(),
+                flight.getId().getArrivalAirportCode());
+        rabbitMessagingTemplate.convertAndSend(FMSApplication.FLIGHT_QUEUE, flightMessage);
+    }
+}
