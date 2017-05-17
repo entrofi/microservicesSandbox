@@ -12,5 +12,5 @@ package net.entrofi.microservices.sandbox.kbms.domain.repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface CityRepository {
+public interface DivisionRepository {
 }
