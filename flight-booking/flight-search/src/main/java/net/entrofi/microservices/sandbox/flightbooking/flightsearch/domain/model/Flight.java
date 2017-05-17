@@ -23,6 +23,11 @@ public class Flight {
 
     private String destination;
 
+    private String originDivision;
+
+    private String destinationDivision;
+
+
 
     public String getId() {
         return id;
@@ -65,9 +70,27 @@ public class Flight {
     }
 
 
+    public String getOriginDivision() {
+        return originDivision;
+    }
+
+    public void setOriginDivision(String originDivision) {
+        this.originDivision = originDivision;
+    }
+
+    public String getDestinationDivision() {
+        return destinationDivision;
+    }
+
+    public void setDestinationDivision(String destinationDivision) {
+        this.destinationDivision = destinationDivision;
+    }
+
     @Override
     public String toString() {
         return "Flight:id="+id+";flightNumber="+flightNumber
                 +";origin="+origin+";destination="+destination+";date="+date;
     }
+
+
 }
