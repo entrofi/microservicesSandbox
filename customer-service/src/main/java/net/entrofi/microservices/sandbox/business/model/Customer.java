@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.business.model;
 
 import javax.persistence.Column;

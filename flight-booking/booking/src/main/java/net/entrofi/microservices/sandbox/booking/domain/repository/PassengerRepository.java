@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.booking.domain.repository;
 
 import net.entrofi.microservices.sandbox.booking.domain.model.Passenger;

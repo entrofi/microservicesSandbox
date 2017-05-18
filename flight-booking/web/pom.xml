@@ -13,7 +13,7 @@
     <artifactId>web</artifactId>
 
     <name>Flight Booking Web</name>
-    <description>Flight booking application web site </description>
+    <description>Flight booking application web site</description>
 
 
     <properties>

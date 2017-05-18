@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.business.service;
 
 
@@ -22,7 +21,6 @@ public class NotificationMessageSender {
         LOGGER.info("Sending message to the queue" + CustomerServiceApplication.CUSTOMER_NOTIFICATION_QUEUE_NAME);
         messagingTemplate.convertAndSend(CustomerServiceApplication.CUSTOMER_NOTIFICATION_QUEUE_NAME, message);
     }
-
 
 
 }

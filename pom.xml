@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>net.entrofi.microservices.sandbox</groupId>
-  <artifactId>project-aggregator</artifactId>
-  <packaging>pom</packaging>   
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Sandbox Aggregator</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.entrofi.microservices.sandbox</groupId>
+    <artifactId>project-aggregator</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Sandbox Aggregator</name>
 
-  <description>
-    Microservices Sandbox sample aggregator pom
-  </description>
+    <description>
+        Microservices Sandbox sample aggregator pom
+    </description>
 
 
-  <modules>
-    <module>customer-service</module>
-    <module>notification-service</module>
-    <module>hateoas</module>
-    <module>flight-booking</module>
-    <module>bom</module>
+    <modules>
+        <module>customer-service</module>
+        <module>notification-service</module>
+        <module>hateoas</module>
+        <module>flight-booking</module>
+        <module>bom</module>
 
-  </modules>
-  
+    </modules>
+
 
 </project>

@@ -8,15 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class BookingApplication implements CommandLineRunner {
-	private static final Logger logger = LoggerFactory.getLogger(BookingApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(BookingApplication.class);
 
-	
-	public static void main(String[] args) {
-		SpringApplication.run(BookingApplication.class, args);
-	}
 
-	@Override
-	public void run(String... strings) throws Exception {
+    public static void main(String[] args) {
+        SpringApplication.run(BookingApplication.class, args);
+    }
 
-	}
+    @Override
+    public void run(String... strings) throws Exception {
+
+    }
 }
