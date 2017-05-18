@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.flightbooking.flightsearch;
 
 
@@ -16,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 public class FlightSearchApplication {
 
     public static final String FLIGHT_QUEUE = "flightQueue";
+    public static final String FLIGHT_INVENTORY_QUEUE = "flightInventoryQueue";
 
     public static void main(String[] args) {
         SpringApplication.run(FlightSearchApplication.class, args);
@@ -25,6 +25,10 @@ public class FlightSearchApplication {
     @Bean
     public Queue flightQueue() {
         return new Queue(FLIGHT_QUEUE, false);
+    }
+
+    public Queue flightInventoryQueue() {
+        return new Queue(FLIGHT_INVENTORY_QUEUE, false);
     }
 
     @Bean

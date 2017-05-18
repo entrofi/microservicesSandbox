@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model;
 
 
@@ -19,14 +18,11 @@ public class Flight {
     @Indexed
     private Date date;
 
-    private String origin;
+    private Airport origin;
 
-    private String destination;
+    private Airport destination;
 
-    private String originDivision;
-
-    private String destinationDivision;
-
+    private int availableSeats;
 
 
     public String getId() {
@@ -53,43 +49,27 @@ public class Flight {
         this.date = date;
     }
 
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
+    public void setOrigin(Airport origin) {
         this.origin = origin;
     }
 
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
+    public void setDestination(Airport destination) {
         this.destination = destination;
     }
 
-
-    public String getOriginDivision() {
-        return originDivision;
+    public int getAvailableSeats() {
+        return availableSeats;
     }
 
-    public void setOriginDivision(String originDivision) {
-        this.originDivision = originDivision;
-    }
-
-    public String getDestinationDivision() {
-        return destinationDivision;
-    }
-
-    public void setDestinationDivision(String destinationDivision) {
-        this.destinationDivision = destinationDivision;
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
     }
 
     @Override
     public String toString() {
-        return "Flight:id="+id+";flightNumber="+flightNumber
-                +";origin="+origin+";destination="+destination+";date="+date;
+        return "Flight: id=" + id + "; flightNumber=" + flightNumber
+                + "; origin=" + origin + "; destination=" + destination
+                + "; date=" + date + "; available seats=" + availableSeats;
     }
 
 
