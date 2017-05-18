@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
 import javax.persistence.Entity;

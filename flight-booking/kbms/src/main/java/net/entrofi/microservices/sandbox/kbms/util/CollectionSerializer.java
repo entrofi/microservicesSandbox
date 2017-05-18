@@ -14,6 +14,7 @@ import java.util.Collection;
  */
 public class CollectionSerializer extends JsonSerializer<Collection<?>> {
     private static final Logger LOG = LoggerFactory.getLogger(CollectionSerializer.class);
+
     /**
      * Method that can be called to ask implementation to serialize
      * values of type this serializer handles.
@@ -25,10 +26,10 @@ public class CollectionSerializer extends JsonSerializer<Collection<?>> {
     @Override
     public void serialize(Collection<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 
-        if(jgen.getOutputContext().getParent().getCurrentIndex() == 0){
+        if (jgen.getOutputContext().getParent().getCurrentIndex() == 0) {
             LOG.debug("Serializing collection........" + jgen.getOutputContext().getCurrentName());
             jgen.writeObject(value);
-        }else{
+        } else {
             jgen.writeStartArray();
             jgen.writeEndArray();
         }

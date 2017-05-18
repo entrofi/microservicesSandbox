@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.fms.env.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

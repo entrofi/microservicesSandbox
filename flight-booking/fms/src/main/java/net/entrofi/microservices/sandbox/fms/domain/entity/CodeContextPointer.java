@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Access(AccessType.PROPERTY)
 public class CodeContextPointer {
 
-    public static final class CodeContextAttrNames{
+    public static final class CodeContextAttrNames {
         public static final String CODE = "code";
         public static final String CODE_CONTEXT = "codeContext";
     }
@@ -23,6 +23,7 @@ public class CodeContextPointer {
     public enum CodeContext {
         ICAO, IATA
     }
+
     @NotNull
     private String code;
 
@@ -33,10 +34,11 @@ public class CodeContextPointer {
 
     }
 
-    public CodeContextPointer(@NotNull String code, @NotNull String codeContext){
+    public CodeContextPointer(@NotNull String code, @NotNull String codeContext) {
         this.code = code;
         this.codeContext = codeContext;
     }
+
     public String getCode() {
         return code;
     }
@@ -61,7 +63,7 @@ public class CodeContextPointer {
     @Override
     public boolean equals(Object obj) {
         CodeContextPointer that = (CodeContextPointer) obj;
-        if(obj != null) {
+        if (obj != null) {
             return code.equals((that.getCode())) && codeContext.equals(that.getCodeContext());
         } else {
             return false;

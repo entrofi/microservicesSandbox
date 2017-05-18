@@ -23,16 +23,16 @@ public class HateoasApplicationTests {
 
     private static final String HOST = "http://localhost:8080";
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
     @Test
-	public void testSecureService() {
+    public void testSecureService() {
         final String credentials = "user:password";
         final String encodedCredentials = new String(Base64.encode((credentials.getBytes())));
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(HttpHeaders.AUTHORIZATION, "Basic" + encodedCredentials );
+        httpHeaders.add(HttpHeaders.AUTHORIZATION, "Basic" + encodedCredentials);
 
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
 
@@ -62,7 +62,7 @@ public class HateoasApplicationTests {
 
         Greeting greeting = oAuth2RestTemplate.getForObject(HOST, Greeting.class);
 
-        assertEquals(Greeting.GREETING_BODY, greeting.getGreetingMessage() );
+        assertEquals(Greeting.GREETING_BODY, greeting.getGreetingMessage());
     }
 
 }

@@ -21,15 +21,16 @@ import java.util.Set;
 /**
  * TODO Note that this entity is not audited because Hibernate envers currently does not support EmbeddedIds with nested Embeddable fields.
  * TODO Therefore Audit log for this entity should be handled manually.
+ *
  * @author hcomak
  * @created 27 Mar 2015
  */
 @Entity
 //@Audited
-@Table(name="FMS_FLIGHT")
+@Table(name = "FMS_FLIGHT")
 public class Flight {
 
-    public enum FlightCategory{
+    public enum FlightCategory {
         INTERNATIONAL, DOMESTIC
     }
 
@@ -38,7 +39,7 @@ public class Flight {
     private FlightId id;
 
 
-    @Pattern(message="{net.entrofi.microservices.sandbox.fms.domain.entity.Flight.error.validation.codeFormat}", regexp = "[A-Z0-9]{0,7}\\b")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.fms.domain.entity.Flight.error.validation.codeFormat}", regexp = "[A-Z0-9]{0,7}\\b")
     private String callSign;
 
     private Boolean arrivalSecurityCheck;
@@ -71,7 +72,7 @@ public class Flight {
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualTimeArrival;
 
-    @Pattern(message="{net.entrofi.microservices.sandbox.fms.domain.entity.flight.error.validation.overMidnightIndicatorFormat}", regexp = "[1-9]{1}\\b")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.fms.domain.entity.flight.error.validation.overMidnightIndicatorFormat}", regexp = "[1-9]{1}\\b")
     @Column(name = "MIDNIGHT_IND", length = 1)
     private String overMidnightIndicator;
 
@@ -89,7 +90,7 @@ public class Flight {
 
     @ManyToOne
     @JoinColumn(name = "PUB_STATUS")
-    private FlightStatus  publicStatus;
+    private FlightStatus publicStatus;
 
     @ManyToMany
     private Set<Crew> crews = new HashSet<>();

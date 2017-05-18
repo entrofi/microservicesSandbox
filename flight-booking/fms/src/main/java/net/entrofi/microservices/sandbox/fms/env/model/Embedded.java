@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.fms.env.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,6 +7,7 @@ import java.util.List;
 
 
 public class Embedded {
+    //TODO this should be generic
     @JsonProperty("airports")
     private List<Airport> list = new ArrayList<>();
 

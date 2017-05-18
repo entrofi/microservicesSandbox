@@ -11,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="FMS_FLIGHT_STATUS", uniqueConstraints = {
+@Table(name = "FMS_FLIGHT_STATUS", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"CODE", "CODE_SET"}, name = "FMS_FLIGHT_STAT_CODE_CODE_SET_U")
 })
 public class FlightStatus extends BaseInfoEntity {
@@ -31,7 +31,7 @@ public class FlightStatus extends BaseInfoEntity {
     /**
      * Status indicator code
      */
-    @Column(name="CODE", nullable = false)
+    @Column(name = "CODE", nullable = false)
     private String code;
 
     /**
@@ -42,7 +42,7 @@ public class FlightStatus extends BaseInfoEntity {
     /**
      * AIDX PADIS EDIFACT AND XML CODESET reference number
      */
-    @Column(name="CODE_SET", nullable = false)
+    @Column(name = "CODE_SET", nullable = false)
     private String codeSet = CODE_SET_UNSPECIFIED;
 
 
@@ -81,25 +81,25 @@ public class FlightStatus extends BaseInfoEntity {
 
 
     @Override
-    public boolean equals(Object o){
-        if(o == this){
+    public boolean equals(Object o) {
+        if (o == this) {
             return true;
         }
-        if(!(o instanceof FlightStatus)){
+        if (!(o instanceof FlightStatus)) {
             return false;
         }
         FlightStatus status = (FlightStatus) o;
         //TODO should we add type argument here?
-        if(status.getCode().equals(this.getCode())
+        if (status.getCode().equals(this.getCode())
                 && status.getCodeSet().equals(this.getCodeSet())
-                && status.getId().longValue() == this.getId().longValue()){
+                && status.getId().longValue() == this.getId().longValue()) {
             return true;
         }
         return false;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = 13;
         int cofactor = 8;
         int codeElem = code == null ? 0 : code.hashCode();

@@ -18,10 +18,10 @@ import java.util.Date;
 public abstract class BaseInfoEntity extends BaseEntity {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3313308193089225957L;
-	/**
+     *
+     */
+    private static final long serialVersionUID = -3313308193089225957L;
+    /**
      * The creation date of the entity
      */
     @Temporal(TemporalType.TIMESTAMP)

@@ -16,10 +16,11 @@ import javax.validation.constraints.Size;
 
 /*******************************************************************************
  * Airport
- * TODO Following field should be disscussed with analysts IS_DELETED, RECORD_ACTION, RECORD_ACTION_USER_ID, RECORD_ACTION_TIMESTAMP, SHORT_DESCRIPTION, TIME_ZONE
+ * TODO Following fields should be disscussed with analysts IS_DELETED, RECORD_ACTION, RECORD_ACTION_USER_ID, RECORD_ACTION_TIMESTAMP, SHORT_DESCRIPTION, TIME_ZONE
+ *
  * @author hcomak
- * @created 3/6/2015
  * @version $version
+ * @created 3/6/2015
  * @since 0.0.1-SNAPSHOT
  ******************************************************************************/
 @Entity
@@ -30,22 +31,22 @@ public class Airport extends BaseInfoEntity {
 
     private static final long serialVersionUID = -8739449904320236625L;
 
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
-    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Airport.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airport.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
     @NotNull
     @Size(min = 3, max = 4, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airport.error.validation.codeFormat}")
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String icaoCode;
 
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
-    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Division.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Division.error.validation.codeFormat}", regexp = "[A-Z]{3}\\b")
     @NotNull
     @Size(min = 3, max = 3, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airport.error.validation.codeFormat}")
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String code;
 
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
-    @Column(nullable=false)
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
+    @Column(nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)

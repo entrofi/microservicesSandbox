@@ -1,12 +1,11 @@
 package net.entrofi.microservices.sandbox.kbms.domain.model.base;
 
-import java.util.Date;
-
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import java.util.Date;
 
 /**
  * This entity holds the values for info entity auditing.
@@ -19,10 +18,10 @@ import javax.persistence.Version;
 public abstract class BaseInfoEntity extends BaseEntity {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3313308193089225957L;
-	/**
+     *
+     */
+    private static final long serialVersionUID = -3313308193089225957L;
+    /**
      * The creation date of the entity
      */
     @Temporal(TemporalType.TIMESTAMP)

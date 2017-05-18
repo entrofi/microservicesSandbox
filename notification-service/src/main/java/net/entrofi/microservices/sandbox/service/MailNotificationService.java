@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ public class MailNotificationService {
     private JavaMailSender javaMailSender;
 
     public void sendRegisterationSuccessMail(String email) {
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(email);
         mailMessage.setSubject("Registration");
         mailMessage.setText("Successfully Registered");

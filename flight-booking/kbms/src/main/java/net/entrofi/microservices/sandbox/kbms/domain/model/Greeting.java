@@ -18,9 +18,9 @@ public class Greeting extends ResourceSupport {
 
     public Greeting(final String name) {
 
-        if(!StringUtils.isEmpty(name)) {
+        if (!StringUtils.isEmpty(name)) {
             greetingMessage = GREETING_BODY + " " + name;
-        }else {
+        } else {
             greetingMessage = GREETING_BODY;
         }
     }

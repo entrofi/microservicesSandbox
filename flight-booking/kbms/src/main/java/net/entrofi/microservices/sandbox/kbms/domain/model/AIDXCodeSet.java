@@ -14,13 +14,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- *
  * @author hcomak
  * @created 11 May 2015
  */
 @Entity
 @Audited
-@Table(name="KBMS_AIDX_CODE_SET", uniqueConstraints = {
+@Table(name = "KBMS_AIDX_CODE_SET", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"CODE", "CODE_SET"}, name = "KBMS_AIDX_CODE_SET_CODE_U")
 })
 public class AIDXCodeSet extends BaseInfoEntity {
@@ -40,8 +39,8 @@ public class AIDXCodeSet extends BaseInfoEntity {
     /**
      * Status indicator code
      */
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
-    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.FlightStatus.error.validation.codeFormat}", regexp = "[A-Z0-9]{1,}\\b")
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.FlightStatus.error.validation.codeFormat}", regexp = "[A-Z0-9]{1,}\\b")
     @NotNull
     @Column(name = "CODE", nullable = false)
     private String code;
@@ -54,7 +53,7 @@ public class AIDXCodeSet extends BaseInfoEntity {
     /**
      * AIDX PADIS EDIFACT AND XML CODESET reference number
      */
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
     @Column(name = "CODE_SET", nullable = false)
     private String codeSet = CODE_SET_UNSPECIFIED;
 

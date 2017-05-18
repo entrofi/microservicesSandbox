@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.kbms.domain.repository;
 
 

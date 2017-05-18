@@ -10,23 +10,22 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 
-
 @SpringBootApplication
 @EnableGlobalMethodSecurity
 @EnableAuthorizationServer
 @EnableResourceServer
 public class KBMSApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KBMSApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(KBMSApplication.class, args);
+    }
 
-	@Bean
-	ServletRegistrationBean h2servletRegistration(){
-		ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
-		registrationBean.addUrlMappings("/console/*");
-		return registrationBean;
-	}
+    @Bean
+    ServletRegistrationBean h2servletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
+        registrationBean.addUrlMappings("/console/*");
+        return registrationBean;
+    }
 }
 
 

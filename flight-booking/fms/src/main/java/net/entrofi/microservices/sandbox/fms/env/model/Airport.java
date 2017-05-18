@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.fms.env.model;
 
 
@@ -19,7 +18,7 @@ public class Airport {
     }
 
     public void setCode(String code) {
-        if(StringUtils.isEmpty(this.codeContextPointer.getCode())) {
+        if (StringUtils.isEmpty(this.codeContextPointer.getCode())) {
             this.code = code;
             this.codeContextPointer.setCode(code);
         }

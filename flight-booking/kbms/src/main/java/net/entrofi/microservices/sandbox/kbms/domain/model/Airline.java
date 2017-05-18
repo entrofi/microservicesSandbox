@@ -23,21 +23,21 @@ import javax.validation.constraints.Size;
 @Table(name = "KBMS_AIRLINE")
 public class Airline extends BaseInfoEntity {
 
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
-    @Column(nullable=false)
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
+    @Column(nullable = false)
     private String name;
 
-    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Airline.error.validation.codeFormat}", regexp = "[A-Z0-9]{2,3}\\b")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airline.error.validation.codeFormat}", regexp = "[A-Z0-9]{2,3}\\b")
     @NotNull
     @Size(min = 3, max = 3, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airline.error.validation.codeFormat}")
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String code;
 
-    @NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
-    @Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Airline.error.validation.codeFormat}", regexp = "[A-Z0-9]{2,3}\\b")
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.FieldIsRequired}")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airline.error.validation.codeFormat}", regexp = "[A-Z0-9]{2,3}\\b")
     @NotNull
     @Size(min = 3, max = 3, message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Airline.error.validation.icaoCodeFormat}")
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String icaoCode;
 
     @Enumerated(EnumType.STRING)

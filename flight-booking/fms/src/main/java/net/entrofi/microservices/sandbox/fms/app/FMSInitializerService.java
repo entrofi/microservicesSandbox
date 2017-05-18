@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.fms.app;
 
 
@@ -6,10 +5,10 @@ import net.entrofi.microservices.sandbox.fms.domain.entity.Aircraft;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Crew;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Flight;
 import net.entrofi.microservices.sandbox.fms.domain.entity.FlightId;
-import net.entrofi.microservices.sandbox.fms.env.model.Airport;
 import net.entrofi.microservices.sandbox.fms.domain.repository.AircraftRepository;
 import net.entrofi.microservices.sandbox.fms.domain.repository.CrewRepository;
 import net.entrofi.microservices.sandbox.fms.domain.repository.FlightRepository;
+import net.entrofi.microservices.sandbox.fms.env.model.Airport;
 import net.entrofi.microservices.sandbox.fms.service.FlightQueuePublisher;
 import net.entrofi.microservices.sandbox.fms.service.KBMSConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,6 @@ public class FMSInitializerService {
     private List<Airport> airports;
 
 
-
     public List<Aircraft> createAircrafts() {
         Aircraft[] aircrafts = {
                 new Aircraft("Boeing", "747-8F", 152),
@@ -64,24 +62,24 @@ public class FMSInitializerService {
 
     public List<Crew> createCrews() {
         String[] pilotRoles = {"Captain", "Officer"};
-        String[] cabinCrewRoles = { "Purser", "Flight Attendant"};
+        String[] cabinCrewRoles = {"Purser", "Flight Attendant"};
         List<Crew> crews = new ArrayList<>();
 
-        for(int i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             Crew pilot = new Crew();
             int nameSuffix = ThreadLocalRandom.current().nextInt(12);
             pilot.setName("Pilot " + nameSuffix);
-            pilot.setSurname("Pilot_surname " + nameSuffix );
+            pilot.setSurname("Pilot_surname " + nameSuffix);
             pilot.setRole(pilotRoles[i % 2]);
             crews.add(pilot);
         }
 
-        for(int j= 0; j < 60; j++) {
+        for (int j = 0; j < 60; j++) {
             Crew cabinCrew = new Crew();
             int nameSuffix = ThreadLocalRandom.current().nextInt(30);
             String role = cabinCrewRoles[j % 2];
             cabinCrew.setRole(role);
-            cabinCrew.setName("Crew " + role + nameSuffix );
+            cabinCrew.setName("Crew " + role + nameSuffix);
             cabinCrew.setSurname("Crew_surname " + role + nameSuffix);
             crews.add(cabinCrew);
         }
@@ -93,11 +91,11 @@ public class FMSInitializerService {
 
     public void createFlights(final int count) {
         List<Aircraft> aircrafts = aircraftRepository.findAll();
-        if(aircrafts.isEmpty()){
+        if (aircrafts.isEmpty()) {
             aircrafts = createAircrafts();
         }
 
-        for(int i = 0; i <= count; i++) {
+        for (int i = 0; i <= count; i++) {
             Flight flight = new Flight();
             Date[] datePair = calculateDatePair();
             FlightId flightId = fetchRandomBasicFlightIdBuilder()
@@ -115,7 +113,7 @@ public class FMSInitializerService {
 
 
     private Set<Crew> fetchCrewsForFlight() {
-        if(crewRepository.count() <= 0) {
+        if (crewRepository.count() <= 0) {
             createCrews();
         }
 
@@ -128,7 +126,7 @@ public class FMSInitializerService {
         crewSet.add(captains.get(ThreadLocalRandom.current().nextInt(captains.size())));
         crewSet.add(pilots.get(ThreadLocalRandom.current().nextInt(pilots.size())));
         crewSet.add(pursers.get(ThreadLocalRandom.current().nextInt(pursers.size())));
-        for(int i = 0; i < attendants.size() && i < 5; i++) {
+        for (int i = 0; i < attendants.size() && i < 5; i++) {
             crewSet.add(attendants.get(ThreadLocalRandom.current().nextInt(attendants.size())));
         }
         return crewSet;
@@ -136,17 +134,18 @@ public class FMSInitializerService {
 
     /**
      * Generates a flight id builder instance with core fields departure, arrival and flight number.
+     *
      * @return core flight id builder.
      */
     private FlightId.FlightIdBuilder fetchRandomBasicFlightIdBuilder() {
-        if(airports == null || airports.isEmpty()) {
+        if (airports == null || airports.isEmpty()) {
             airports = new ArrayList<>();
             airports = kbmsConsumerService.getAirports();
         }
         List<Airport> airportTuple = new LinkedList<>();
-        while(airportTuple.size() < 2) {
+        while (airportTuple.size() < 2) {
             int index = ThreadLocalRandom.current().nextInt(0, 2);
-            if(!airportTuple.contains(airports.get(index))) {
+            if (!airportTuple.contains(airports.get(index))) {
                 airportTuple.add(airports.get(index));
             }
         }
@@ -159,7 +158,6 @@ public class FMSInitializerService {
     }
 
     /**
-     *
      * @return randomly calculated departure arrival dates
      */
     private Date[] calculateDatePair() {

@@ -34,12 +34,11 @@ import java.util.Set;
 
 /*******************************************************************************
  * Country
- * 
+ * <p>
  * Please provide <b><u>detailed</u></b> class definition.
- * Sample Start: This class is a part of KBMS application 
- * and is responsible of accessing remote machines with the use of different 
+ * Sample Start: This class is a part of KBMS application
+ * and is responsible of accessing remote machines with the use of different
  * protocols.
- *
  *
  * @author hcomak
  * @see <Add inherited classes>
@@ -50,74 +49,74 @@ import java.util.Set;
 public class Country extends BaseInfoEntity {
 
 
-	private static final long serialVersionUID = 7811541726640126797L;
+    private static final long serialVersionUID = 7811541726640126797L;
 
 
-	@NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
-	@Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Country.error.validation.codeFormat}", regexp = "[A-Z]{2}\\b")
-	@Column(unique= true, nullable = false)
-	private String code;
-	
-	@NotEmpty(message="{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
-	@Pattern(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Country.error.validation.name.format}", regexp = "^([A-Za-z]{2,})([A-Z\\s]){0,}([A-Za-z]{0,})\\b")
-	@Column(unique=true, nullable = false)
-	private String name;
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Country.error.validation.codeFormat}", regexp = "[A-Z]{2}\\b")
+    @Column(unique = true, nullable = false)
+    private String code;
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Status status = Status.ACTIVE;
-	
-	@NotNull(message="{net.entrofi.microservices.sandbox.kbms.domain.model.Country.error.validation.region.null}")
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private Region region;
-	
-	@OneToMany(mappedBy="country")
-	@JsonBackReference
-	private Set<Division> cities = new HashSet<Division>();
+    @NotEmpty(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.commons.error.name.empty}")
+    @Pattern(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Country.error.validation.name.format}", regexp = "^([A-Za-z]{2,})([A-Z\\s]){0,}([A-Za-z]{0,})\\b")
+    @Column(unique = true, nullable = false)
+    private String name;
 
-	public String getCode() {
-		return code;
-	}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status = Status.ACTIVE;
 
-	
-	public void setCode(String code) {
-		this.code = code;
-	}
+    @NotNull(message = "{net.entrofi.microservices.sandbox.kbms.domain.model.Country.error.validation.region.null}")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Region region;
 
-	
-	public String getName() {
-		return name;
-	}
+    @OneToMany(mappedBy = "country")
+    @JsonBackReference
+    private Set<Division> cities = new HashSet<Division>();
 
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public Region getRegion() {
-		return region;
-	}
-
-	
-	public void setRegion(Region region) {
-		this.region = region;
-	}
+    public String getCode() {
+        return code;
+    }
 
 
-	@XmlTransient
-	public Set<Division> getCities() {
-		return cities;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setCities(Set<Division> cities) {
-		this.cities = cities;
-	}
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+
+    @XmlTransient
+    public Set<Division> getCities() {
+        return cities;
+    }
+
+    public void setCities(Set<Division> cities) {
+        this.cities = cities;
+    }
 }

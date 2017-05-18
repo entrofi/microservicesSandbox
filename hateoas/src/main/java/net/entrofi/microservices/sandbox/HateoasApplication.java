@@ -12,9 +12,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableResourceServer
 public class HateoasApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HateoasApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HateoasApplication.class, args);
+    }
 }
 
 

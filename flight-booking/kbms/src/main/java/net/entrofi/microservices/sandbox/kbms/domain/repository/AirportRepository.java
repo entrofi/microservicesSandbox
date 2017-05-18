@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.kbms.domain.repository;
 
 
@@ -11,6 +10,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface AirportRepository extends JpaRepository<Airport, Long> {
 
 
-    Airport findByCode(@Param("code")String code);
+    Airport findByCode(@Param("code") String code);
 
 }

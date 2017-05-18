@@ -24,12 +24,12 @@ import java.util.Date;
 @Embeddable
 public class FlightId implements Serializable {
 
-    public FlightId(){
+    public FlightId() {
         this.departureAirport = new CodeContextPointer();
         this.airline = new CodeContextPointer();
     }
 
-    
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE, column = @Column(name = "AIRLINE_CODE")),
@@ -57,7 +57,7 @@ public class FlightId implements Serializable {
     private String flightNumber;
 
     @Basic(optional = true)
-    private String operationalSuffix = String.valueOf((char)216);
+    private String operationalSuffix = String.valueOf((char) 216);
 
     @Temporal(value = TemporalType.TIMESTAMP)
     @Basic(optional = false)
@@ -78,21 +78,21 @@ public class FlightId implements Serializable {
 
     @Basic
     @Column(name = "AIRLINE_CODE")
-    public String getAirlineCode(){
+    public String getAirlineCode() {
         return getAirline().getCode();
     }
 
-    public void setAirlineCode(String airlineCode){
+    public void setAirlineCode(String airlineCode) {
         getAirline().setCode(airlineCode);
     }
 
     @Basic
     @Column(name = "AIRLINE_CODE_CTX")
-    public String getAirlineCodeContext(){
+    public String getAirlineCodeContext() {
         return getAirline().getCodeContext();
     }
 
-    public void setAirlineCodeContext(String airlineCodeContext){
+    public void setAirlineCodeContext(String airlineCodeContext) {
         getAirline().setCode(airlineCodeContext);
     }
 
@@ -107,21 +107,21 @@ public class FlightId implements Serializable {
 
     @Basic
     @Column(name = "DEP_AP_CODE")
-    public String getDepartureAirportCode(){
+    public String getDepartureAirportCode() {
         return getDepartureAirport().getCode();
     }
 
-    public void setDepartureAirportCode(String code){
+    public void setDepartureAirportCode(String code) {
         getDepartureAirport().setCode(code);
     }
 
     @Basic
     @Column(name = "DEP_AP_CODE_CTX")
-    public String getDepartureAirportCodeContext(){
+    public String getDepartureAirportCodeContext() {
         return getDepartureAirport().getCodeContext();
     }
 
-    public void setDepartureAirportCodeContext(String codeContext){
+    public void setDepartureAirportCodeContext(String codeContext) {
         getDepartureAirport().setCodeContext(codeContext);
     }
 
@@ -137,21 +137,21 @@ public class FlightId implements Serializable {
 
     @Basic
     @Column(name = "ARR_AP_CODE")
-    public String getArrivalAirportCode(){
+    public String getArrivalAirportCode() {
         return getArrivalAirport().getCode();
     }
 
-    public void setArrivalAirportCode(String code){
+    public void setArrivalAirportCode(String code) {
         getArrivalAirport().setCode(code);
     }
 
     @Basic
     @Column(name = "ARR_AP_CODE_CTX")
-    public String getArrivalAirportCodeContext(){
+    public String getArrivalAirportCodeContext() {
         return getArrivalAirport().getCodeContext();
     }
 
-    public void setArrivalAirportCodeContext(String codeContext){
+    public void setArrivalAirportCodeContext(String codeContext) {
         getArrivalAirport().setCodeContext(codeContext);
     }
 
@@ -199,27 +199,27 @@ public class FlightId implements Serializable {
 
         private Date originDate;
 
-        private String operationalSuffix = String.valueOf((char)216);
+        private String operationalSuffix = String.valueOf((char) 216);
 
         private int repeatNumber;
 
 
-        private FlightIdBuilder(){
+        private FlightIdBuilder() {
         }
+
         /**
-         *
          * @param departureAirport mandatory
-         * @param arrivalAirport mandatory
-         * @param flightNumber mandatory
+         * @param arrivalAirport   mandatory
+         * @param flightNumber     mandatory
          * @throws IllegalArgumentException when either departure airport, arrival airport or flightNumber is invalid or
-         * departure airport and arrival airport are same.
+         *                                  departure airport and arrival airport are same.
          */
         public static FlightIdBuilder newInstance(@NotNull final CodeContextPointer departureAirport,
                                                   @NotNull final CodeContextPointer arrivalAirport,
                                                   @NotNull final String flightNumber) {
-            if(departureAirport == null || arrivalAirport == null || StringUtils.isEmpty(flightNumber)) {
+            if (departureAirport == null || arrivalAirport == null || StringUtils.isEmpty(flightNumber)) {
                 throw new IllegalArgumentException("Departure airport, Arrival airport and flight number must all be valid for flight creation");
-            } else if(departureAirport.equals(arrivalAirport)) {
+            } else if (departureAirport.equals(arrivalAirport)) {
                 throw new IllegalArgumentException("Departure airport and arrival airport must be different airports");
             }
             FlightIdBuilder builder = new FlightIdBuilder();

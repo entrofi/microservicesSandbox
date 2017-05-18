@@ -1,4 +1,3 @@
-
 package net.entrofi.microservices.sandbox.controller;
 
 import net.entrofi.microservices.sandbox.model.Greeting;
