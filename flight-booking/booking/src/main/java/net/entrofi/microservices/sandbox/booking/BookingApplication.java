@@ -1,15 +1,25 @@
 package net.entrofi.microservices.sandbox.booking;
 
+import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BookingApplication implements CommandLineRunner {
+
     private static final Logger logger = LoggerFactory.getLogger(BookingApplication.class);
 
+    public static final String FLIGHT_INVENTORY_QUEUE = "flightInventoryQueue";
 
     public static void main(String[] args) {
         SpringApplication.run(BookingApplication.class, args);
@@ -18,5 +28,31 @@ public class BookingApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
+    }
+
+    @Bean
+    ServletRegistrationBean h2servletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
+        registrationBean.addUrlMappings("/console/*");
+        return registrationBean;
+    }
+
+
+    @Bean
+    public Queue flightInventoryQueue() {
+        return new Queue(FLIGHT_INVENTORY_QUEUE, false);
+    }
+
+
+    @Bean
+    public RabbitTemplate jsonRabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setMessageConverter(jsonConverter());
+        return template;
+    }
+
+    @Bean
+    public MessageConverter jsonConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 }

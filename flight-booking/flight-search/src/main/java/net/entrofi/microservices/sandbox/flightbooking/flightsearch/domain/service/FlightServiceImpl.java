@@ -38,7 +38,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void updateInventory(String flightNumber, Date flightDate, int availableSeats) {
-        Flight flight = flightRepository.findByDateAandFlightNumber(flightDate, flightNumber);
+        Flight flight = flightRepository.findByDateAndFlightNumber(flightDate, flightNumber);
         if(flight == null ) {
             LOGGER.info("Unable to find flight with flight number: " + flightNumber + " on " + flightDate);
         } else {

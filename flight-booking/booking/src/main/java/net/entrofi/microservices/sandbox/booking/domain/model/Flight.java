@@ -5,10 +5,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
-public class Flight {
+public class Flight implements Serializable {
 
     @Basic(optional = false)
     private String origin;

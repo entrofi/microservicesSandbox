@@ -1,7 +1,10 @@
 package net.entrofi.microservices.sandbox.booking.domain.model;
 
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +20,15 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "PASSENGER_ID")
     private String passengerId;
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="flightNumber", column=@Column(name = "FLIGHT_NUMBER")),
+            @AttributeOverride(name="origin", column=@Column(name = "ORIGIN")),
+            @AttributeOverride(name="destination", column = @Column(name = "DESTINATION"))
+    })
     private Flight flight;
 
     @Column(nullable = false)
