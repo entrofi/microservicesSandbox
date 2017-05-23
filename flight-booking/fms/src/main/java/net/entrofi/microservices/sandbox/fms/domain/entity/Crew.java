@@ -1,5 +1,7 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,5 +57,9 @@ public class Crew {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String toString() {
+        return  ToStringBuilder.reflectionToString(this);
     }
 }

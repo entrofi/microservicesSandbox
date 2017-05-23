@@ -1,5 +1,7 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -68,5 +70,9 @@ public class Aircraft {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this);
     }
 }

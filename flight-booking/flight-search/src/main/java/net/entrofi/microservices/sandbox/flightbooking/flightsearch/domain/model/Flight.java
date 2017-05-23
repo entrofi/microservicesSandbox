@@ -1,6 +1,7 @@
 package net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model;
 
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -67,9 +68,7 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight: id=" + id + "; flightNumber=" + flightNumber
-                + "; origin=" + origin + "; destination=" + destination
-                + "; date=" + date + "; available seats=" + availableSeats;
+        return ToStringBuilder.reflectionToString(this);
     }
 
 

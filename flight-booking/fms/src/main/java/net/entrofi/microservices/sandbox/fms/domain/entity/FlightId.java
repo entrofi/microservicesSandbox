@@ -1,5 +1,6 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.AttributeOverride;
@@ -185,6 +186,17 @@ public class FlightId implements Serializable {
 
     public void setRepeatNumber(int repeatNumber) {
         this.repeatNumber = repeatNumber;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("flight number", flightNumber)
+                .append("origin date", originDate)
+                .append("departure airport", departureAirport)
+                .append("arrival airport", arrivalAirport)
+                .append("airline", airline)
+                .append("operational suffix", operationalSuffix)
+                .append("repeat", repeatNumber).toString();
     }
 
     public static class FlightIdBuilder {

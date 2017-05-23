@@ -1,5 +1,7 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
@@ -57,7 +59,7 @@ public class CodeContextPointer {
 
     @Override
     public String toString() {
-        return "code: " + code + ", context: " + codeContext;
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override

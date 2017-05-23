@@ -1,0 +1,51 @@
+package net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.model;
+
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+
+public class FMSFlightMessage {
+
+    private final String flightNumber;
+
+    private final Date date;
+
+    private final String origin;
+
+    private final String destination;
+
+    @JsonCreator
+    public FMSFlightMessage(@JsonProperty("flightNumber")String flightNumber, @JsonProperty("date")Date date,
+                         @JsonProperty("origin") String origin, @JsonProperty("destination")String destination) {
+        this.flightNumber = flightNumber;
+        this.date = date;
+        this.origin = origin;
+        this.destination = destination;
+    }
+
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    @Override
+    public String toString() {
+        return flightNumber + " on " + date + " from " + origin + " to " + destination;
+    }
+
+}

@@ -1,5 +1,8 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.core.style.ToStringCreator;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -250,5 +253,15 @@ public class Flight {
 
     public void setAircraft(Aircraft aircraft) {
         this.aircraft = aircraft;
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("status", publicStatus)
+                .append("operational status", operationalStatus)
+                .toString();
     }
 }

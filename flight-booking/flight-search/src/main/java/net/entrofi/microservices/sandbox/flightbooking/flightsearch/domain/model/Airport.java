@@ -1,6 +1,8 @@
 package net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model;
 
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Airport {
 
     private String code;
@@ -32,5 +34,9 @@ public class Airport {
 
     public void setDivisionName(String divisionName) {
         this.divisionName = divisionName;
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }
