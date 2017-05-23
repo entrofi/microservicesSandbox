@@ -1,5 +1,7 @@
 package net.entrofi.microservices.sandbox.booking;
 
+import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
+import net.entrofi.microservices.sandbox.booking.service.FlightInventoryQueuePublisher;
 import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,9 +20,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BookingApplication implements CommandLineRunner {
 
-    private static final Logger logger = LoggerFactory.getLogger(BookingApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookingApplication.class);
 
     public static final String FLIGHT_INVENTORY_QUEUE = "flightInventoryQueue";
+
+    @Autowired
+    private FlightInventoryQueuePublisher flightInventoryQueuePublisher;
 
     public static void main(String[] args) {
         SpringApplication.run(BookingApplication.class, args);
@@ -27,7 +33,7 @@ public class BookingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-
+        flightInventoryQueuePublisher.updateInventory(new Inventory());
     }
 
     @Bean

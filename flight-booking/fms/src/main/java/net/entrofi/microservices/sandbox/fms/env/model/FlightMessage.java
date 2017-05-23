@@ -13,8 +13,11 @@ public class FlightMessage {
 
     private final String destination;
 
-    public FlightMessage(String flightNumber, Date date, String origin, String destination) {
+    private final int capacity;
+
+    public FlightMessage(String flightNumber, Date date, int capacity, String origin, String destination) {
         this.flightNumber = flightNumber;
+        this.capacity = capacity;
         this.date = date;
         this.origin = origin;
         this.destination = destination;
@@ -38,4 +41,7 @@ public class FlightMessage {
         return destination;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
 }

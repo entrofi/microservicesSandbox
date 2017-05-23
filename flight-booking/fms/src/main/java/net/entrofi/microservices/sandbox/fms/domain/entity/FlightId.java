@@ -33,23 +33,29 @@ public class FlightId implements Serializable {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE, column = @Column(name = "AIRLINE_CODE")),
-            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE_CONTEXT, column = @Column(name = "AIRLINE_CODE_CTX"))
+            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE,
+                    column = @Column(name = "AIRLINE_CODE")),
+            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE_CONTEXT,
+                    column = @Column(name = "AIRLINE_CODE_CTX"))
     })
     private CodeContextPointer airline;
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE, column = @Column(name = "DEP_AP_CODE")),
-            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE_CONTEXT, column = @Column(name = "DEP_AP_CODE_CTX"))
+            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE,
+                    column = @Column(name = "DEP_AP_CODE")),
+            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE_CONTEXT,
+                    column = @Column(name = "DEP_AP_CODE_CTX"))
     })
     private CodeContextPointer departureAirport;
 
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE, column = @Column(name = "ARR_AP_CODE")),
-            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE_CONTEXT, column = @Column(name = "ARR_AP_CODE_CTX"))
+            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE,
+                    column = @Column(name = "ARR_AP_CODE")),
+            @AttributeOverride(name = CodeContextPointer.CodeContextAttrNames.CODE_CONTEXT,
+                    column = @Column(name = "ARR_AP_CODE_CTX"))
     })
     private CodeContextPointer arrivalAirport;
 

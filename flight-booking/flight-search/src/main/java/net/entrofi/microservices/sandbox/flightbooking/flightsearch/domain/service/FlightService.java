@@ -2,7 +2,7 @@ package net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.serv
 
 
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model.Flight;
-import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.FlightQuery;
+import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.model.FlightQuery;
 
 import java.util.Date;
 import java.util.List;

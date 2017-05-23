@@ -3,7 +3,7 @@ package net.entrofi.microservices.sandbox.flightbooking.flightsearch.controller;
 
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model.Flight;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.service.FlightService;
-import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.FlightQuery;
+import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.model.FlightQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

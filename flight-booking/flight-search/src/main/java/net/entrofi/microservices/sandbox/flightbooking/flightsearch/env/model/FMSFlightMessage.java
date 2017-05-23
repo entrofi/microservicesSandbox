@@ -16,11 +16,17 @@ public class FMSFlightMessage {
 
     private final String destination;
 
+    private final int capacity;
+
     @JsonCreator
-    public FMSFlightMessage(@JsonProperty("flightNumber")String flightNumber, @JsonProperty("date")Date date,
-                         @JsonProperty("origin") String origin, @JsonProperty("destination")String destination) {
+    public FMSFlightMessage(@JsonProperty("flightNumber")String flightNumber,
+                            @JsonProperty("date")Date date,
+                            @JsonProperty("capacity") int capacity,
+                            @JsonProperty("origin") String origin,
+                            @JsonProperty("destination")String destination) {
         this.flightNumber = flightNumber;
         this.date = date;
+        this.capacity = capacity;
         this.origin = origin;
         this.destination = destination;
     }
@@ -41,6 +47,10 @@ public class FMSFlightMessage {
 
     public String getDestination() {
         return destination;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 
     @Override

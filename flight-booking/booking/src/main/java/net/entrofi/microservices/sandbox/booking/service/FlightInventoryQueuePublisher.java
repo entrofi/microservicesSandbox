@@ -1,6 +1,7 @@
 package net.entrofi.microservices.sandbox.booking.service;
 
 
+import net.entrofi.microservices.sandbox.booking.BookingApplication;
 import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ public class FlightInventoryQueuePublisher {
     private RabbitMessagingTemplate rabbitMessagingTemplate;
 
     public void updateInventory(Inventory inventory) {
-        LOGGER.debug("Inventory upadte message");
+        rabbitMessagingTemplate.convertAndSend(BookingApplication.FLIGHT_INVENTORY_QUEUE, "hello");
+        LOGGER.debug("Inventory update message");
     }
 }

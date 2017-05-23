@@ -9,8 +9,8 @@ import net.entrofi.microservices.sandbox.fms.domain.repository.AircraftRepositor
 import net.entrofi.microservices.sandbox.fms.domain.repository.CrewRepository;
 import net.entrofi.microservices.sandbox.fms.domain.repository.FlightRepository;
 import net.entrofi.microservices.sandbox.fms.env.model.Airport;
-import net.entrofi.microservices.sandbox.fms.service.FlightQueuePublisher;
-import net.entrofi.microservices.sandbox.fms.service.KBMSConsumerService;
+import net.entrofi.microservices.sandbox.fms.env.service.FlightQueuePublisher;
+import net.entrofi.microservices.sandbox.fms.env.service.FMSKBMSConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +37,7 @@ public class FMSInitializerService {
     private CrewRepository crewRepository;
 
     @Autowired
-    private KBMSConsumerService kbmsConsumerService;
+    private FMSKBMSConsumerService kbmsConsumerService;
 
     @Autowired
     private FlightQueuePublisher flightQueuePublisher;

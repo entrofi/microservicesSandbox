@@ -1,5 +1,7 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.core.style.ToStringCreator;
 
@@ -96,6 +98,7 @@ public class Flight {
     private FlightStatus publicStatus;
 
     @ManyToMany
+    @JsonBackReference
     private Set<Crew> crews = new HashSet<>();
 
 
@@ -136,6 +139,7 @@ public class Flight {
     }
 
     @Transient
+    @JsonIgnore
     public Duration getFlightDuration() {
         return Duration.ofMillis(flightDurationLong);
     }
