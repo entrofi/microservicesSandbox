@@ -1,7 +1,9 @@
 package net.entrofi.microservices.sandbox.fms.app;
 
 
+import net.entrofi.microservices.sandbox.fms.app.helpers.FlightIdHelper;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Aircraft;
+import net.entrofi.microservices.sandbox.fms.domain.entity.CodeContextPointer;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Crew;
 import net.entrofi.microservices.sandbox.fms.domain.entity.Flight;
 import net.entrofi.microservices.sandbox.fms.domain.entity.FlightId;
@@ -9,10 +11,10 @@ import net.entrofi.microservices.sandbox.fms.domain.repository.AircraftRepositor
 import net.entrofi.microservices.sandbox.fms.domain.repository.CrewRepository;
 import net.entrofi.microservices.sandbox.fms.domain.repository.FlightRepository;
 import net.entrofi.microservices.sandbox.fms.env.model.Airport;
-import net.entrofi.microservices.sandbox.fms.env.service.FlightQueuePublisher;
 import net.entrofi.microservices.sandbox.fms.env.service.FMSKBMSConsumerService;
+import net.entrofi.microservices.sandbox.fms.env.service.FlightQueuePublisher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-@Component
+@Service
 public class FMSInitializerService {
 
     @Autowired
@@ -137,7 +139,7 @@ public class FMSInitializerService {
      *
      * @return core flight id builder.
      */
-    private FlightId.FlightIdBuilder fetchRandomBasicFlightIdBuilder() {
+    private FlightIdHelper.FlightIdBuilder fetchRandomBasicFlightIdBuilder() {
         if (airports == null || airports.isEmpty()) {
             airports = new ArrayList<>();
             airports = kbmsConsumerService.getAirports();
@@ -151,8 +153,8 @@ public class FMSInitializerService {
         }
         final String flighNumber = "TK" + ThreadLocalRandom.current().nextInt(100, 1000);
 
-        FlightId.FlightIdBuilder flightIdBuilder = FlightId.FlightIdBuilder.newInstance(airportTuple.get(0).getCodeContextPointer(),
-                airportTuple.get(1).getCodeContextPointer(), flighNumber);
+        FlightIdHelper.FlightIdBuilder flightIdBuilder = FlightIdHelper.FlightIdBuilder.newInstance(airportTuple.get(0).getCodeContextPointer(),
+                airportTuple.get(1).getCodeContextPointer(), flighNumber, new CodeContextPointer("TK", "IATA"));
 
         return flightIdBuilder;
     }

@@ -1,7 +1,6 @@
 package net.entrofi.microservices.sandbox.fms.domain.entity;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.util.StringUtils;
+import net.entrofi.microservices.sandbox.fms.app.helpers.FlightIdHelper;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -12,7 +11,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,6 +25,7 @@ public class FlightId implements Serializable {
 
     public FlightId() {
         this.departureAirport = new CodeContextPointer();
+        this.arrivalAirport = new CodeContextPointer();
         this.airline = new CodeContextPointer();
     }
 
@@ -196,83 +195,8 @@ public class FlightId implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("flight number", flightNumber)
-                .append("origin date", originDate)
-                .append("departure airport", departureAirport)
-                .append("arrival airport", arrivalAirport)
-                .append("airline", airline)
-                .append("operational suffix", operationalSuffix)
-                .append("repeat", repeatNumber).toString();
+       return FlightIdHelper.convertFlightIdToString(this);
     }
 
-    public static class FlightIdBuilder {
 
-        private CodeContextPointer airline;
-
-        private CodeContextPointer departure;
-
-        private CodeContextPointer arrival;
-
-        private String flightNumber;
-
-        private Date originDate;
-
-        private String operationalSuffix = String.valueOf((char) 216);
-
-        private int repeatNumber;
-
-
-        private FlightIdBuilder() {
-        }
-
-        /**
-         * @param departureAirport mandatory
-         * @param arrivalAirport   mandatory
-         * @param flightNumber     mandatory
-         * @throws IllegalArgumentException when either departure airport, arrival airport or flightNumber is invalid or
-         *                                  departure airport and arrival airport are same.
-         */
-        public static FlightIdBuilder newInstance(@NotNull final CodeContextPointer departureAirport,
-                                                  @NotNull final CodeContextPointer arrivalAirport,
-                                                  @NotNull final String flightNumber) {
-            if (departureAirport == null || arrivalAirport == null || StringUtils.isEmpty(flightNumber)) {
-                throw new IllegalArgumentException("Departure airport, Arrival airport and flight number must all be valid for flight creation");
-            } else if (departureAirport.equals(arrivalAirport)) {
-                throw new IllegalArgumentException("Departure airport and arrival airport must be different airports");
-            }
-            FlightIdBuilder builder = new FlightIdBuilder();
-            builder.airline = new CodeContextPointer("TK", CodeContextPointer.CodeContext.IATA.name());
-            builder.departure = departureAirport;
-            builder.arrival = arrivalAirport;
-            builder.flightNumber = flightNumber;
-            return builder;
-        }
-
-        public FlightIdBuilder originDate(Date originDate) {
-            this.originDate = originDate;
-            return this;
-        }
-
-        public FlightIdBuilder operationalSuffix(String operationalSuffix) {
-            this.operationalSuffix = operationalSuffix;
-            return this;
-        }
-
-        public FlightIdBuilder repeatNumber(int repeatNumber) {
-            this.repeatNumber = repeatNumber;
-            return this;
-        }
-
-        public FlightId build() {
-            FlightId flightId = new FlightId();
-            flightId.setDepartureAirport(this.departure);
-            flightId.setArrivalAirport(this.arrival);
-            flightId.setAirline(airline);
-            flightId.setFlightNumber(flightNumber);
-            flightId.setOriginDate(originDate);
-            flightId.setRepeatNumber(repeatNumber);
-            flightId.setOperationalSuffix(operationalSuffix);
-            return flightId;
-        }
-    }
 }
