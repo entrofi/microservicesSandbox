@@ -23,11 +23,11 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<Flight> findAvailableFlights(FlightQuery flightQuery) {
-        List<Flight> flights = flightRepository.findByOrigin_DivisionNameAndDestination_DivisionNameAndDate(
+        List<Flight> flights = flightRepository.findByOrigin_DivisionNameLikeAndDestination_DivisionNameLikeAndDate(
                 flightQuery.getOriginDivision(),
                 flightQuery.getDestinationDivision(),
                 flightQuery.getDate());
-        LOGGER.trace("Found " + flights.size() + " for query: " + flightQuery.toString());
+        LOGGER.info("Found " + flights.size() + " for query: " + flightQuery.toString());
         return flights.stream().filter(flight -> flight.getAvailableSeats() > 0).collect(Collectors.toList());
     }
 

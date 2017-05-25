@@ -50,11 +50,20 @@ public class Flight {
         this.date = date;
     }
 
+    public Airport getOrigin() {
+        return origin;
+    }
+
     public void setOrigin(Airport origin) {
         this.origin = origin;
     }
 
-    public void setDestination(Airport destination) {
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setDestination(
+            Airport destination) {
         this.destination = destination;
     }
 

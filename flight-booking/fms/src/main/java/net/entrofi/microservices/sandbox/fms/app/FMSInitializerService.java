@@ -146,7 +146,7 @@ public class FMSInitializerService {
         }
         List<Airport> airportTuple = new LinkedList<>();
         while (airportTuple.size() < 2) {
-            int index = ThreadLocalRandom.current().nextInt(0, 2);
+            int index = ThreadLocalRandom.current().nextInt(0, airports.size() - 1);
             if (!airportTuple.contains(airports.get(index))) {
                 airportTuple.add(airports.get(index));
             }
