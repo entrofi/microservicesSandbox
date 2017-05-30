@@ -58,6 +58,7 @@
     </dependencies>
 
     <modules>
+        <module>config-server</module>
         <module>kbms</module>
         <module>flight-search</module>
         <module>booking</module>
