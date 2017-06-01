@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a5ea38d_fad12e28",
+        "filename": "flight-booking/web/src/main/java/net/entrofi/microservices/sandbox/flightbooking/web/FlightBookingWebApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011365
+      },
+      "writtenOn": "2017-06-01T12:04:33Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 14,
+        "startChar": 69,
+        "endLine": 14,
+        "endChar": 70
+      },
+      "revId": "61fb12f83292e8d0a8a31dcdac080b99c5f1ac38",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
