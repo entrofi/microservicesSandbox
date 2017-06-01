@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7d3ad11_4caf8ac5",
+        "filename": "flight-booking/web/src/main/java/net/entrofi/microservices/sandbox/flightbooking/web/FlightBookingWebApplication.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011365
+      },
+      "writtenOn": "2017-06-01T12:11:59Z",
+      "side": 1,
+      "message": "old way\n\npublic static void main(String[] args) {\n        SpringApplication.run(FlightBookingWebApplication.class, args);\n    }\n\n@SpringBootApplication + this main will be sufficient",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 14,
+        "endChar": 71
+      },
+      "revId": "b87412ca739e2f33832160babb96806b5d7b1b54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b43e981_ab1ab34a",
+        "filename": "flight-booking/web/src/main/java/net/entrofi/microservices/sandbox/flightbooking/web/FlightBookingWebApplication.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011365
+      },
+      "writtenOn": "2017-06-01T12:11:59Z",
+      "side": 1,
+      "message": "old way",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 5
+      },
+      "revId": "b87412ca739e2f33832160babb96806b5d7b1b54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
