@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64d1d255_c4e20fc4",
+        "filename": "flight-booking/flight-search/src/main/java/net/entrofi/microservices/sandbox/flightbooking/flightsearch/domain/service/FlightServiceImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1011365
+      },
+      "writtenOn": "2017-06-02T14:00:09Z",
+      "side": 1,
+      "message": "can be replaced by a class",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "1716100160c874e13be69236d167cc67de77fc7d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
