@@ -15,8 +15,9 @@ public interface FlightRepository extends MongoRepository<Flight, String> {
 
     List<Flight> findByOrigin_DivisionNameAndDestination_DivisionNameAndDate(String originDivision, String destinationDivision, Date date);
 
-    List<Flight> findByOrigin_DivisionNameLikeAndDestination_DivisionNameLikeAndDate(String originDivision, String
-            destinationDivision, Date date);
+    List<Flight> findByOrigin_DivisionNameLikeAndDestination_DivisionNameLikeAndDateBetween(String originDivision,
+                                                                                            String
+            destinationDivision, Date startDate, Date endDate);
 
 
 }

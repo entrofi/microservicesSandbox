@@ -1,14 +1,3 @@
-/* *****************************************************************************
- * Country.java
- *
- * Copyright (c) 2012 TAV Bilisim Hizmetleri AS, TURKIYE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * TAV Bilisim Hizmetleri AS, TURKIYE
- *
- * 
- ******************************************************************************/
 package net.entrofi.microservices.sandbox.kbms.domain.model;
 
 
