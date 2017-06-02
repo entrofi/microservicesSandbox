@@ -97,9 +97,12 @@ public class FMSInitializerService {
             aircrafts = createAircrafts();
         }
 
+        Date[] datePair = null;
         for (int i = 0; i <= count; i++) {
             Flight flight = new Flight();
-            Date[] datePair = calculateDatePair();
+            if(datePair == null || i % 2 == 0) {
+                datePair = calculateDatePair();
+            }
             FlightId flightId = fetchRandomBasicFlightIdBuilder()
                     .originDate(datePair[0]).operationalSuffix("PUB")
                     .repeatNumber(0).build();

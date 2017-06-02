@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,10 +26,11 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<Flight> findAvailableFlights(FlightQuery flightQuery) {
-        List<Flight> flights = flightRepository.findByOrigin_DivisionNameLikeAndDestination_DivisionNameLikeAndDate(
+        List<Date> startEnd = getDayStartToEnd(flightQuery.getDate());
+        List<Flight> flights = flightRepository.findByOrigin_DivisionNameLikeAndDestination_DivisionNameLikeAndDateBetween(
                 flightQuery.getOriginDivision(),
                 flightQuery.getDestinationDivision(),
-                flightQuery.getDate());
+                startEnd.get(0), startEnd.get(1));
         LOGGER.info("Found " + flights.size() + " for query: " + flightQuery.toString());
         return flights.stream().filter(flight -> flight.getAvailableSeats() > 0).collect(Collectors.toList());
     }
@@ -47,5 +51,32 @@ public class FlightServiceImpl implements FlightService {
             flightRepository.save(flight);
         }
 
+    }
+
+
+    private List<Date> getDayStartToEnd(final Date referenceDate) {
+        if(referenceDate == null) {
+            return Collections.EMPTY_LIST;
+        }
+        List<Date> dates = new ArrayList<>(2);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(referenceDate);
+
+
+        dates.add(0, getDateForHourAndMins(referenceDate, 0, 0));
+        dates.add(1, getDateForHourAndMins(referenceDate, 23, 59));
+
+        return dates;
+    }
+
+    private Date getDateForHourAndMins(final Date referenceDate, final int hours, final int minutes) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(referenceDate);
+
+        calendar.set(Calendar.HOUR_OF_DAY, hours);
+        calendar.set(Calendar.MINUTE, minutes);
+        calendar.set(Calendar.SECOND, 0);
+        final Date date = new Date(calendar.getTimeInMillis());
+        return  date;
     }
 }
