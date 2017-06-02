@@ -4,13 +4,76 @@
     <meta charset="UTF-8"/>
     <title>TK Airlines</title>
 
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-include"/>
+    <script src="/js/app/search-flight.js" type="text/javascript"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <!--Page content container -->
 <div class="container">
-    Search Flight
+    <form class="form-inline" id="flight-search-form"
+          name="flight-search-form" method="post"
+          th:action="@{/flights/search}" th:object="${flightSearchQuery}">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-6 form-group" id="flight-search-date-container">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" placeholder="Your flight date" th:field="*{date}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </input>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span3 col-md-3 form-group">
+                    <label for="originAirport">From:</label>
+                    <input type="text" class="form-control" placeholder="City/Airport" id="originAirport"
+                           th:field="*{origin}"/>
+                </div>
+                <div class="span3 col-md-3 form-group">
+                    <label for="originAirport">To:</label>
+                    <input type="text" class="form-control" placeholder="City/Airport" id="destinationAirport"
+                           th:field="*{destination}"/>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+            <div class="row" th:if="${not #lists.isEmpty(flightList)}" th:each="flight : ${flightList}">
+                <div class="col-md-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                    <tr class="sucess">
+                                        <td>
+                                            <span class="glyphicon glyphicon-plane"
+                                                  th:text="${flight.flightNumber}" aria-hidden="true">flight number</span>
+                                        </td>
+                                        <td>
+                                            <span th:text="${flight.origin.code + '-' + flight.origin.divisionName}">origin
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"> </span>
+                                        </td>
+                                        <td>
+                                            <span th:text="${flight.destination.code + '-' + flight.destination.divisionName}"> destination</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
 </div>
 <!-- @End page content container -->
 <div th:replace="fragments/footer :: footer"/>

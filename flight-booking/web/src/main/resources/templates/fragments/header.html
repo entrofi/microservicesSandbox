@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:fragment="header-css">
-        <!-- header-css -->
-        <link rel="stylesheet" type="text/css"
-              href="/css/bootstrap.min.css" />
+    <div th:fragment="header-include">
+        <!-- header-include -->
+        <link id="bs-css" rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+        <link id="bsdp-css" href="/js/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css"
+              rel="stylesheet"/>
+        <link id="app-css" rel="stylesheet" th:href="@{/css/main.css}" href="/css/main.css" />
 
-        <link rel="stylesheet" th:href="@{/css/main.css}"
-              href="/css/main.css" />
+        <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+        <script src="/js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/js/bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.min.js" charset="UTF-8"></script>
+
     </div>
 </head>
 <body>
