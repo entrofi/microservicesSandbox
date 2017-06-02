@@ -14,15 +14,9 @@
         Microservices Sandbox sample aggregator pom
     </description>
 
-
     <modules>
-        <module>customer-service</module>
-        <module>notification-service</module>
-        <module>hateoas</module>
         <module>flight-booking</module>
         <module>bom</module>
-
     </modules>
-
 
 </project>
