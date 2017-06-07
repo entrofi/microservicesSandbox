@@ -1,4 +1,4 @@
-package net.entrofi.microservices.sandbox.flightbooking.web.controller;
+package net.entrofi.microservices.sandbox.flightbooking.web.Controller;
 
 import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFlight;
 import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFlightSearchQuery;
@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -24,14 +26,20 @@ public class WebFlightController {
     @Autowired
     private FlightSearchConsumer flightSearchConsumer;
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @PostMapping(value = "/search")
     public String search(@ModelAttribute("flightSearchQuery") WebFlightSearchQuery webFlightSearchQuery, Model model) {
-        LOGGER.trace("Searching for flights with " + webFlightSearchQuery);
+        LOGGER.info("Searching for flights with " + webFlightSearchQuery);
         List<WebFlight> flights = flightSearchConsumer.findFlights(webFlightSearchQuery);
         model.addAttribute("flightList", flights);
         model.addAttribute("flightSearchQuery", webFlightSearchQuery);
         return "search-flight";
     }
 
+    @GetMapping(value = "/detail/{id}")
+    public String flightDetail(@PathVariable String id, Model model) {
+        WebFlight flightDetails = flightSearchConsumer.getFlightDetail(id);
+        model.addAttribute("flightDetails", flightDetails);
+        return "flight-details";
+    }
 
 }

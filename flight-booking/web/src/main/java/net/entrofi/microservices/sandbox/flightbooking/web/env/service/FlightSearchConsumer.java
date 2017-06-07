@@ -52,6 +52,12 @@ public class FlightSearchConsumer {
                              .collect(Collectors.toList());
     }
 
+    public WebFlight getFlightDetail(String id) {
+        FlightSearchFlight result =
+                restTemplate.getForObject(FLIGHT_SEARCH_URL + "/flights/" + id, FlightSearchFlight.class);
+        return toWebFlight(result);
+    }
+
     private WebFlight toWebFlight(FlightSearchFlight flightSearchFlight) {
         WebFlight webFlight = new WebFlight();
         webFlight.setAvailableSeats(flightSearchFlight.getAvailableSeats());
@@ -71,6 +77,9 @@ public class FlightSearchConsumer {
 
         webFlight.setFlightNumber(flightSearchFlight.getFlightNumber());
         webFlight.setAvailableSeats(flightSearchFlight.getAvailableSeats());
+
+        webFlight.setId(flightSearchFlight.getId());
+
         return webFlight;
     }
 
