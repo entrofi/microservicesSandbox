@@ -27,6 +27,7 @@ public class FlightSearchApplication {
         return new Queue(FLIGHT_QUEUE, false);
     }
 
+    @Bean
     public Queue flightInventoryQueue() {
         return new Queue(FLIGHT_INVENTORY_QUEUE, false);
     }
