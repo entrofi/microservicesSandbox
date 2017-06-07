@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymealeaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TK Airlines</title>
+
+    <div th:replace="fragments/header :: header-include"/>
+    <script src="/js/app/search-flight.js" type="text/javascript"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!--Page content container -->
+<div class="container">
+    <div class="well">
+
+        <div class="row">
+            <div class="col-md-4">Flight Number</div>
+            <div class="col-md-4" th:text="${flightDetails.flightNumber}">flight number</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">Flight Date</div>
+            <div class="col-md-4" th:text="${flightDetails.date}">Flight Date</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">Available Seats</div>
+            <div class="col-md-4" th:text="${flightDetails.availableSeats}">Flight Date</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">From</div>
+            <div class="col-md-4" th:text="${flightDetails.origin.code} + ' - ' + ${flightDetails.origin.divisionName}">From</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">To</div>
+            <div class="col-md-4" th:text="${flightDetails.destination.code} + ' - ' + ${flightDetails.destination.divisionName}">To</div>
+        </div>
+    </div>
+
+    <p>
+        <button type="button" class="btn btn-primary">Book Flight</button>
+    </p>
+
+</div>
+<!-- @End page content container -->
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
