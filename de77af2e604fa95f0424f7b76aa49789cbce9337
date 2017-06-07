@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04238d5a_9b2a90e7",
+        "filename": "flight-booking/flight-search/src/main/java/net/entrofi/microservices/sandbox/flightbooking/flightsearch/controller/FlightSearchController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1009972
+      },
+      "writtenOn": "2017-06-07T08:10:49Z",
+      "side": 1,
+      "message": "Flight number may not be unique, also we do not need detail prefix in uri let\u0027s try to be consistent with default hateoas style provided by spring (as possible as it might be) ...",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 49
+      },
+      "revId": "de77af2e604fa95f0424f7b76aa49789cbce9337",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ae1b24d_a8d0bb09",
+        "filename": "flight-booking/flight-search/src/main/java/net/entrofi/microservices/sandbox/flightbooking/flightsearch/domain/service/FlightServiceImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1009972
+      },
+      "writtenOn": "2017-06-07T08:10:49Z",
+      "side": 1,
+      "message": "we need to return a unique flight here, let\u0027s use flight number origin destination and date group as the identifier",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 2
+      },
+      "revId": "de77af2e604fa95f0424f7b76aa49789cbce9337",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
