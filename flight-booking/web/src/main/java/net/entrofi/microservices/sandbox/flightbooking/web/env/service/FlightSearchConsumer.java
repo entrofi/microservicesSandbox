@@ -52,6 +52,12 @@ public class FlightSearchConsumer {
                              .collect(Collectors.toList());
     }
 
+    public WebFlight getFlightDetail(String flightNumber) {
+        FlightSearchFlight result =
+                restTemplate.getForObject(FLIGHT_SEARCH_URL + "/flights/detail/" + flightNumber, FlightSearchFlight.class);
+        return toWebFlight(result);
+    }
+
     private WebFlight toWebFlight(FlightSearchFlight flightSearchFlight) {
         WebFlight webFlight = new WebFlight();
         webFlight.setAvailableSeats(flightSearchFlight.getAvailableSeats());

@@ -50,8 +50,10 @@
                                     <tbody>
                                     <tr class="sucess">
                                         <td>
-                                            <span class="glyphicon glyphicon-plane"
-                                                  th:text="${flight.flightNumber}" aria-hidden="true">flight number</span>
+                                            <a th:href="@{/flights/detail/{id}(id=${flight.flightNumber})}">
+                                                <span class="glyphicon glyphicon-plane" th:text="${flight.flightNumber}"
+                                                      aria-hidden="true">flight number</span>
+                                            </a>
                                         </td>
                                         <td>
                                             <span th:text="${flight.origin.code + '-' + flight.origin.divisionName}">origin

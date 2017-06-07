@@ -14,4 +14,6 @@ public interface FlightService {
     void updateInventory(String flightNumber, Date flightDate, int availableSeats);
 
     Flight save(Flight flight);
+
+    Flight getFlightInfo(String flightNumber);
 }

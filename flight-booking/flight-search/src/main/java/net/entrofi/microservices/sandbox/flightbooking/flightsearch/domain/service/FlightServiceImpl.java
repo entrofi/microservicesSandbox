@@ -41,6 +41,11 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public Flight getFlightInfo(String flightNumber) {
+       return flightRepository.findByFlightNumber(flightNumber).get(0);
+    }
+
+    @Override
     public void updateInventory(String flightNumber, Date flightDate, int availableSeats) {
         Flight flight = flightRepository.findByDateAndFlightNumber(flightDate, flightNumber);
         if(flight == null ) {
