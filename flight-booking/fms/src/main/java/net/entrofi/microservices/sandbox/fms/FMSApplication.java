@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +28,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Import(FMSRepositoryRestResourceConfig.class)
 public class FMSApplication implements CommandLineRunner {
 
-    public static final String FLIGHT_QUEUE = "flightQueue";
+    @Value("${net.entrofi.microservices.sandbox.fms.flightQueueName}")
+    private String flightQueueName;
+
 
     @Autowired
     private FMSInitializerService fmsInitializerService;
@@ -53,7 +56,7 @@ public class FMSApplication implements CommandLineRunner {
 
     @Bean
     public Queue flightQueue() {
-        return new Queue(FLIGHT_QUEUE, false);
+        return new Queue(flightQueueName, false);
     }
 
 

@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +15,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class FlightSearchApplication {
 
-    public static final String FLIGHT_QUEUE = "flightQueue";
-    public static final String FLIGHT_INVENTORY_QUEUE = "flightInventoryQueue";
+
+    @Value("${net.entrofi.microservices.sandbox.fms.flightQueueName}")
+    private String flightQueueName;
+
+    @Value("${net.entrofi.microservices.sandbox.booking.flightInventoryQueueName}")
+    private String flightInventoryQueueName = "flightInventoryQueue";
 
     public static void main(String[] args) {
         SpringApplication.run(FlightSearchApplication.class, args);
@@ -24,12 +29,12 @@ public class FlightSearchApplication {
 
     @Bean
     public Queue flightQueue() {
-        return new Queue(FLIGHT_QUEUE, false);
+        return new Queue(flightQueueName, false);
     }
 
     @Bean
     public Queue flightInventoryQueue() {
-        return new Queue(FLIGHT_INVENTORY_QUEUE, false);
+        return new Queue(flightInventoryQueueName, false);
     }
 
     @Bean

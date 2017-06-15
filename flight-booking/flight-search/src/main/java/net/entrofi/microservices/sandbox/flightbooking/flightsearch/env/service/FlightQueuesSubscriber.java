@@ -1,6 +1,5 @@
 package net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.service;
 
-import net.entrofi.microservices.sandbox.flightbooking.flightsearch.FlightSearchApplication;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model.Flight;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.service.FlightService;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.model.FMSFlightMessage;
@@ -31,7 +30,7 @@ public class FlightQueuesSubscriber {
     private FSKBMSConsumerService kbmsConsumerService;
 
 
-    @RabbitListener(queues = FlightSearchApplication.FLIGHT_QUEUE)
+    @RabbitListener(queues = "${net.entrofi.microservices.sandbox.fms.flightQueueName}")
     public void processNewFlights(FMSFlightMessage flightMessage) {
         LOGGER.info("Processing new flight " + flightMessage);
         Flight flight = new Flight();
@@ -52,7 +51,7 @@ public class FlightQueuesSubscriber {
      *
      * @param flightInfo the map&lt;String, Object&gt; containing FLIGHT_NUMBER, FLIGHT_DATE, AVAILABILITY
      */
-    @RabbitListener(queues = FlightSearchApplication.FLIGHT_INVENTORY_QUEUE)
+    @RabbitListener(queues = "${net.entrofi.microservices.sandbox.booking.flightInventoryQueueName}")
     public void processFlightAvailability(Map<String, Object> flightInfo) {
         String flightNumber = (String)flightInfo.get("FLIGHT_NUMBER");
         String dateString = (String)flightInfo.get("FLIGHT_DATE");
