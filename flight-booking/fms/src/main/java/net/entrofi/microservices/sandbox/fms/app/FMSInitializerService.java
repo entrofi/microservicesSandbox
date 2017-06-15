@@ -67,27 +67,24 @@ public class FMSInitializerService {
         String[] cabinCrewRoles = {"Purser", "Flight Attendant"};
         List<Crew> crews = new ArrayList<>();
 
-        for (int i = 0; i < 12; i++) {
-            Crew pilot = new Crew();
-            int nameSuffix = ThreadLocalRandom.current().nextInt(12);
-            pilot.setName("Pilot " + nameSuffix);
-            pilot.setSurname("Pilot_surname " + nameSuffix);
-            pilot.setRole(pilotRoles[i % 2]);
-            crews.add(pilot);
-        }
-
-        for (int j = 0; j < 60; j++) {
-            Crew cabinCrew = new Crew();
-            int nameSuffix = ThreadLocalRandom.current().nextInt(30);
-            String role = cabinCrewRoles[j % 2];
-            cabinCrew.setRole(role);
-            cabinCrew.setName("Crew " + role + nameSuffix);
-            cabinCrew.setSurname("Crew_surname " + role + nameSuffix);
-            crews.add(cabinCrew);
-        }
+        crews.addAll(createCrewGroupList(pilotRoles, 12, "Pilot "));
+        crews.addAll(createCrewGroupList(cabinCrewRoles, 60, "Crew "));
 
         crews.forEach(crew -> crewRepository.save(crew));
 
+        return crews;
+    }
+
+    private List<Crew> createCrewGroupList(String[] roles, int count, String prefix) {
+        List<Crew> crews = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Crew pilot = new Crew();
+            int nameSuffix = ThreadLocalRandom.current().nextInt(count);
+            pilot.setName(prefix + nameSuffix);
+            pilot.setSurname(prefix + nameSuffix);
+            pilot.setRole(roles[i % 2]);
+            crews.add(pilot);
+        }
         return crews;
     }
 
@@ -154,10 +151,10 @@ public class FMSInitializerService {
                 airportTuple.add(airports.get(index));
             }
         }
-        final String flighNumber = "TK" + ThreadLocalRandom.current().nextInt(100, 1000);
+        final String flightNumber = "TK" + ThreadLocalRandom.current().nextInt(100, 1000);
 
         FlightIdHelper.FlightIdBuilder flightIdBuilder = FlightIdHelper.FlightIdBuilder.newInstance(airportTuple.get(0).getCodeContextPointer(),
-                airportTuple.get(1).getCodeContextPointer(), flighNumber, new CodeContextPointer("TK", "IATA"));
+                airportTuple.get(1).getCodeContextPointer(), flightNumber, new CodeContextPointer("TK", "IATA"));
 
         return flightIdBuilder;
     }

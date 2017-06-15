@@ -11,6 +11,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +23,12 @@ public class BookingApplication implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingApplication.class);
 
-    public static final String FLIGHT_INVENTORY_QUEUE = "flightInventoryQueue";
+    @Value("${net.entrofi.microservices.sandbox.fms.flightQueueName}")
+    private String flightQueueName;
+
+    @Value("${net.entrofi.microservices.sandbox.booking.flightInventoryQueueName}")
+    private String flightInventoryQueueName = "flightInventoryQueue";
+
 
     @Autowired
     private FlightInventoryQueuePublisher flightInventoryQueuePublisher;
@@ -45,8 +51,14 @@ public class BookingApplication implements CommandLineRunner {
 
 
     @Bean
+    public Queue flightQueue() {
+        return new Queue(flightQueueName, false);
+    }
+
+
+    @Bean
     public Queue flightInventoryQueue() {
-        return new Queue(FLIGHT_INVENTORY_QUEUE, false);
+        return new Queue(flightInventoryQueueName, false);
     }
 
 
