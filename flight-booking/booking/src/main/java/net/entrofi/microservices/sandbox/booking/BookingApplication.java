@@ -5,6 +5,10 @@ import net.entrofi.microservices.sandbox.booking.service.FlightInventoryQueuePub
 import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AnonymousQueue;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,8 +27,8 @@ public class BookingApplication implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingApplication.class);
 
-    @Value("${net.entrofi.microservices.sandbox.fms.flightQueueName}")
-    private String flightQueueName;
+    @Value("${net.entrofi.microservices.sandbox.fms.flightExchangeName}")
+    private String flightExchangeName;
 
     @Value("${net.entrofi.microservices.sandbox.booking.flightInventoryQueueName}")
     private String flightInventoryQueueName = "flightInventoryQueue";
@@ -49,12 +53,21 @@ public class BookingApplication implements CommandLineRunner {
         return registrationBean;
     }
 
+    @Bean
+    public FanoutExchange flightExchange() {
+        return new FanoutExchange(flightExchangeName);
+    }
 
     @Bean
     public Queue flightQueue() {
-        return new Queue(flightQueueName, false);
+        return new AnonymousQueue();
     }
 
+    @Bean
+    public Binding flightExchangeBinding(@Autowired FanoutExchange flightExchange,
+                                      @Autowired Queue flightQueue) {
+        return BindingBuilder.bind(flightQueue).to(flightExchange);
+    }
 
     @Bean
     public Queue flightInventoryQueue() {

@@ -3,7 +3,7 @@ package net.entrofi.microservices.sandbox.fms;
 import net.entrofi.microservices.sandbox.fms.app.FMSInitializerService;
 import net.entrofi.microservices.sandbox.fms.app.FMSRepositoryRestResourceConfig;
 import org.h2.server.web.WebServlet;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -28,8 +28,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Import(FMSRepositoryRestResourceConfig.class)
 public class FMSApplication implements CommandLineRunner {
 
-    @Value("${net.entrofi.microservices.sandbox.fms.flightQueueName}")
-    private String flightQueueName;
+    @Value("${net.entrofi.microservices.sandbox.fms.flightExchangeName}")
+    private String flightExchangeName;
 
 
     @Autowired
@@ -55,8 +55,8 @@ public class FMSApplication implements CommandLineRunner {
 
 
     @Bean
-    public Queue flightQueue() {
-        return new Queue(flightQueueName, false);
+    public FanoutExchange flightExchange() {
+        return new FanoutExchange(flightExchangeName);
     }
 
 

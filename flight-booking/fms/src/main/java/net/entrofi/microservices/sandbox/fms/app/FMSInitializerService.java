@@ -88,14 +88,14 @@ public class FMSInitializerService {
         return crews;
     }
 
-    public void createFlights(final int count) {
+    public List<Flight> createFlights(final int count) {
         List<Aircraft> aircrafts = aircraftRepository.findAll();
+        List<Flight> flights = new ArrayList<>();
         if (aircrafts.isEmpty()) {
             aircrafts = createAircrafts();
         }
-
         Date[] datePair = null;
-        for (int i = 0; i <= count; i++) {
+        for (int i = 0; i < count; i++) {
             Flight flight = new Flight();
             if(datePair == null || i % 2 == 0) {
                 datePair = calculateDatePair();
@@ -108,9 +108,10 @@ public class FMSInitializerService {
             flight.setScheduledTimeArrival(datePair[1]);
             flight.setCrews(fetchCrewsForFlight());
             flight.setAircraft(aircrafts.get(ThreadLocalRandom.current().nextInt(aircrafts.size())));
-            flightRepository.save(flight);
+            flights.add(flightRepository.save(flight));
             flightQueuePublisher.send(flight);
         }
+        return flights;
     }
 
 
