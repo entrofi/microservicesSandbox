@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Inventory {
@@ -17,7 +18,7 @@ public class Inventory {
     @Column(nullable = false)
     private int capacity;
 
-    @Column(nullable = false)
+    @ManyToOne(optional = false)
     private FlightMarket flightMarket;
 
     public Flight getFlight() {

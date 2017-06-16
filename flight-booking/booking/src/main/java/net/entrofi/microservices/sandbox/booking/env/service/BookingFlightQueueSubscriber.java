@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BookingFlightQueueSubscriber {
 
 
@@ -19,7 +21,7 @@ public class BookingFlightQueueSubscriber {
     private InventoryService inventoryService;
 
 
-    @RabbitListener(queues = "${net.entrofi.microservices.sandbox.booking.flightInventoryQueueName}")
+    @RabbitListener(queues = "#{flightQueue.name}")
     public void processNewFlights(FMSFlightMessage flightMessage) {
         LOGGER.info("Processing new flight " + flightMessage);
         Flight flight = new Flight();

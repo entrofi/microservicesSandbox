@@ -5,9 +5,9 @@ import net.entrofi.microservices.sandbox.fms.domain.entity.Flight;
 import net.entrofi.microservices.sandbox.fms.env.model.FlightMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +16,8 @@ public class FlightQueuePublisher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightQueuePublisher.class);
 
-    @Value("${net.entrofi.microservices.sandbox.fms.flightQueueName}")
-    private String flightQueueName;
+    @Autowired
+    private FanoutExchange flightExchange;
 
     @Autowired
     private RabbitMessagingTemplate rabbitMessagingTemplate;
@@ -29,6 +29,6 @@ public class FlightQueuePublisher {
                 flight.getAircraft().getCapacity(),
                 flight.getId().getDepartureAirportCode(),
                 flight.getId().getArrivalAirportCode());
-        rabbitMessagingTemplate.convertAndSend(flightQueueName, flightMessage);
+        rabbitMessagingTemplate.convertAndSend(flightExchange.getName(), "", flightMessage);
     }
 }
