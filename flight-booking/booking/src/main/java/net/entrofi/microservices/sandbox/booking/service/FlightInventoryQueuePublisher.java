@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class FlightInventoryQueuePublisher {
 
@@ -21,7 +24,12 @@ public class FlightInventoryQueuePublisher {
     private RabbitMessagingTemplate rabbitMessagingTemplate;
 
     public void updateInventory(Inventory inventory) {
-        rabbitMessagingTemplate.convertAndSend(flightInventoryQueueName, "hello");
+
+        Map<String, Object> tempQueueMsg = new HashMap<>();
+        tempQueueMsg.put("FLIGHT_NUMBER", inventory.getFlight().getFlightNumber());
+        tempQueueMsg.put("FLIGHT_DATE", inventory.getFlight().getDate());
+        tempQueueMsg.put("AVAILABILITY", inventory.getAvailableSeats());
+        rabbitMessagingTemplate.convertAndSend(flightInventoryQueueName, tempQueueMsg);
         LOGGER.debug("Inventory update message");
     }
 }

@@ -3,10 +3,16 @@ package net.entrofi.microservices.sandbox.booking.domain.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Inventory {
@@ -20,6 +26,9 @@ public class Inventory {
 
     @ManyToOne(optional = false)
     private FlightMarket flightMarket;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<BookingRecord> bookings = new HashSet<>();
 
     public Flight getFlight() {
         return flight;
@@ -43,6 +52,19 @@ public class Inventory {
 
     public void setFlightMarket(FlightMarket flightMarket) {
         this.flightMarket = flightMarket;
+    }
+
+    public Set<BookingRecord> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<BookingRecord> bookings) {
+        this.bookings = bookings;
+    }
+
+    @Transient
+    public int getAvailableSeats() {
+        return this.capacity - this.bookings.size();
     }
 
     @Override
