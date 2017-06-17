@@ -1,6 +1,8 @@
 package net.entrofi.microservices.sandbox.booking.domain.model;
 
 
+import net.entrofi.microservices.sandbox.booking.app.helpers.InventoryIdHelper;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Basic;
@@ -55,5 +57,10 @@ public class Flight implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return InventoryIdHelper.convertFlightToString(this);
     }
 }

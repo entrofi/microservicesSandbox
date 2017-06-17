@@ -1,6 +1,5 @@
 package net.entrofi.microservices.sandbox.booking;
 
-import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import net.entrofi.microservices.sandbox.booking.service.FlightInventoryQueuePublisher;
 import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
@@ -43,7 +42,6 @@ public class BookingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        flightInventoryQueuePublisher.updateInventory(new Inventory());
     }
 
     @Bean
