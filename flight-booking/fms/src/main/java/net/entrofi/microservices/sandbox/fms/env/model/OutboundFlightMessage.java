@@ -3,7 +3,7 @@ package net.entrofi.microservices.sandbox.fms.env.model;
 
 import java.util.Date;
 
-public class FlightMessage {
+public class OutboundFlightMessage {
 
     private final String flightNumber;
 
@@ -15,7 +15,7 @@ public class FlightMessage {
 
     private final int capacity;
 
-    public FlightMessage(String flightNumber, Date date, int capacity, String origin, String destination) {
+    public OutboundFlightMessage(String flightNumber, Date date, int capacity, String origin, String destination) {
         this.flightNumber = flightNumber;
         this.capacity = capacity;
         this.date = date;

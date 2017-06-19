@@ -25,6 +25,7 @@ public class Flight {
 
     private int availableSeats;
 
+    private double fare;
 
     public String getId() {
         return id;
@@ -73,6 +74,14 @@ public class Flight {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    public void setFare(double fare) {
+        this.fare = fare;
     }
 
     @Override

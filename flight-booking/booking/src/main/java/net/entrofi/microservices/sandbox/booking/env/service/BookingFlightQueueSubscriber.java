@@ -4,7 +4,7 @@ package net.entrofi.microservices.sandbox.booking.env.service;
 import net.entrofi.microservices.sandbox.booking.domain.model.Flight;
 import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import net.entrofi.microservices.sandbox.booking.domain.service.InventoryService;
-import net.entrofi.microservices.sandbox.booking.env.model.FMSFlightMessage;
+import net.entrofi.microservices.sandbox.booking.env.model.InboundFlightMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -22,7 +22,7 @@ public class BookingFlightQueueSubscriber {
 
 
     @RabbitListener(queues = "#{flightQueue.name}")
-    public void processNewFlights(FMSFlightMessage flightMessage) {
+    public void processNewFlights(InboundFlightMessage flightMessage) {
         LOGGER.info("Processing new flight " + flightMessage);
         Flight flight = new Flight();
         flight.setDate(flightMessage.getDate());

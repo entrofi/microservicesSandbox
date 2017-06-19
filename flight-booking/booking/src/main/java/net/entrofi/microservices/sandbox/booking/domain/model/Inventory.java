@@ -1,6 +1,7 @@
 package net.entrofi.microservices.sandbox.booking.domain.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,7 @@ public class Inventory {
     private FlightMarket flightMarket;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference
     private Set<BookingRecord> bookings = new HashSet<>();
 
     public Flight getFlight() {

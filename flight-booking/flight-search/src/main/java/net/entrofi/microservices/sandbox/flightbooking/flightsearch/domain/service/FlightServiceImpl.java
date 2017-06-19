@@ -46,11 +46,10 @@ public class FlightServiceImpl implements FlightService {
         if(flight == null ) {
             LOGGER.info("Unable to find flight with flight number: " + flightNumber + " on " + flightDate);
         } else {
-            LOGGER.trace("Updating available seats to " + availableSeats + " for flight " + flight.toString());
+            LOGGER.info("Updating available seats to " + availableSeats + " for flight " + flight.toString());
             flight.setAvailableSeats(availableSeats);
             flightRepository.save(flight);
         }
-
     }
 
 

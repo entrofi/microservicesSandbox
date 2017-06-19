@@ -1,11 +1,14 @@
 package net.entrofi.microservices.sandbox.booking.domain.service;
 
 
+import net.entrofi.microservices.sandbox.booking.app.helpers.InventoryIdHelper;
 import net.entrofi.microservices.sandbox.booking.domain.model.Flight;
 import net.entrofi.microservices.sandbox.booking.domain.model.FlightMarket;
 import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import net.entrofi.microservices.sandbox.booking.domain.repository.FlightMarketRepository;
 import net.entrofi.microservices.sandbox.booking.domain.repository.InventoryRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class InventoryService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(InventoryService.class);
+
 
     @Autowired
     private InventoryRepository inventoryRepository;
@@ -21,6 +26,16 @@ public class InventoryService {
     @Autowired
     private FlightMarketRepository flightMarketRepository;
 
+
+    public Inventory findByIdString(String flightString) {
+       Inventory inventory = null;
+        try{
+           inventory = inventoryRepository.findOne(InventoryIdHelper.convertFlightFromIATAString(flightString));
+       }catch (IllegalArgumentException iae) {
+            LOGGER.warn("Invalid flight string repesentation provided for finding flight: " + flightString, iae);
+        }
+       return inventory;
+    }
 
     public Inventory save(Flight flight, int capacity) {
         FlightMarket flightMarket = findOrCreateFlightMarket(flight, false);

@@ -1,6 +1,5 @@
 package net.entrofi.microservices.sandbox.booking;
 
-import net.entrofi.microservices.sandbox.booking.service.FlightInventoryQueuePublisher;
 import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +32,6 @@ public class BookingApplication implements CommandLineRunner {
     private String flightInventoryQueueName = "flightInventoryQueue";
 
 
-    @Autowired
-    private FlightInventoryQueuePublisher flightInventoryQueuePublisher;
 
     public static void main(String[] args) {
         SpringApplication.run(BookingApplication.class, args);
