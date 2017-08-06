@@ -15,7 +15,7 @@
     </description>
 
     <modules>
-        <module>flight-booking</module>
+        <module>airline-booking-engine</module>
         <module>bom</module>
     </modules>
 
