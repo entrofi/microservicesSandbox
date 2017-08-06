@@ -69,5 +69,11 @@ public class FMSKBMSConsumerService {
         return airportsResponse.getEmbedded().getList();
     }
 
+    public Airport findAirportByCode(String code) {
+        final Airport kbmsAirport = restTemplate.getForObject(KBMS_ENDPOINT + "/airports/search/query?code="
+                                +code, Airport.class);
+        return kbmsAirport;
+    }
+
 
 }

@@ -13,9 +13,13 @@ import net.entrofi.microservices.sandbox.fms.domain.repository.FlightRepository;
 import net.entrofi.microservices.sandbox.fms.env.model.Airport;
 import net.entrofi.microservices.sandbox.fms.env.service.FMSKBMSConsumerService;
 import net.entrofi.microservices.sandbox.fms.env.service.FlightQueuePublisher;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -89,11 +93,8 @@ public class FMSInitializerService {
     }
 
     public List<Flight> createFlights(final int count) {
-        List<Aircraft> aircrafts = aircraftRepository.findAll();
         List<Flight> flights = new ArrayList<>();
-        if (aircrafts.isEmpty()) {
-            aircrafts = createAircrafts();
-        }
+        List<Aircraft> aircrafts = fetchOrCreateAircrafts();
         Date[] datePair = null;
         for (int i = 0; i < count; i++) {
             Flight flight = new Flight();
@@ -114,6 +115,35 @@ public class FMSInitializerService {
         return flights;
     }
 
+
+
+    public Flight createFlightFromToOn(String origin, String destination, Date departureDate) {
+        final Airport originAirport = findAirport(origin);
+        final Airport destinationAirport = findAirport(destination);
+        final Set<Crew> crews = fetchCrewsForFlight();
+
+        final String flightNumber = fetchRandomFlightNumber();
+
+        final List<Aircraft> aircrafts = fetchOrCreateAircrafts();
+
+        FlightIdHelper.FlightIdBuilder builder = FlightIdHelper.FlightIdBuilder
+                    .newInstance(originAirport.getCodeContextPointer(),
+                                destinationAirport.getCodeContextPointer(), flightNumber,
+                                new CodeContextPointer("TK", "IATA"))
+                    .operationalSuffix("PUB")
+                    .originDate(departureDate);
+
+        Flight flight = new Flight();
+        flight.setId(builder.build());
+        flight.setAircraft(aircrafts.get(ThreadLocalRandom.current().nextInt(aircrafts.size())));
+        flight.setCrews(crews);
+        flight.setScheduledTimeDeparture(departureDate);
+        Date arrivalTime = Date.from(departureDate.toInstant().plus(90, ChronoUnit.MINUTES));
+        flight.setScheduledTimeArrival(arrivalTime);
+        flightRepository.saveAndFlush(flight);
+        flightQueuePublisher.send(flight);
+        return flight;
+    }
 
     private Set<Crew> fetchCrewsForFlight() {
         if (crewRepository.count() <= 0) {
@@ -141,10 +171,7 @@ public class FMSInitializerService {
      * @return core flight id builder.
      */
     private FlightIdHelper.FlightIdBuilder fetchRandomBasicFlightIdBuilder() {
-        if (airports == null || airports.isEmpty()) {
-            airports = new ArrayList<>();
-            airports = kbmsConsumerService.getAirports();
-        }
+        fetchAirports();
         List<Airport> airportTuple = new LinkedList<>();
         while (airportTuple.size() < 2) {
             int index = ThreadLocalRandom.current().nextInt(0, airports.size() - 1);
@@ -152,7 +179,7 @@ public class FMSInitializerService {
                 airportTuple.add(airports.get(index));
             }
         }
-        final String flightNumber = "TK" + ThreadLocalRandom.current().nextInt(100, 1000);
+        final String flightNumber = fetchRandomFlightNumber();
 
         FlightIdHelper.FlightIdBuilder flightIdBuilder = FlightIdHelper.FlightIdBuilder.newInstance(airportTuple.get(0).getCodeContextPointer(),
                 airportTuple.get(1).getCodeContextPointer(), flightNumber, new CodeContextPointer("TK", "IATA"));
@@ -160,6 +187,38 @@ public class FMSInitializerService {
         return flightIdBuilder;
     }
 
+    private String fetchRandomFlightNumber() {
+        return "TK" + ThreadLocalRandom.current().nextInt(100, 1000);
+    }
+
+    private List<Airport> fetchAirports() {
+        if (airports == null || airports.isEmpty()) {
+            airports = new ArrayList<>();
+            airports = kbmsConsumerService.getAirports();
+        }
+        return airports;
+    }
+
+    private Airport findAirport(String airportCode) {
+        Airport airport = null;
+        if(StringUtils.isNotEmpty(airportCode)) {
+            fetchAirports();
+            airport = airports.stream().filter(ap -> ap.getCode().equals(airportCode))
+                        .findFirst()
+                        .orElse(findAndAddAirport(airportCode));
+            return airport;
+        }
+        throw new RuntimeException("Invalid airport code:" + airportCode);
+    }
+
+    private Airport findAndAddAirport(String airportCode) {
+        Airport airport = kbmsConsumerService
+                    .findAirportByCode(airportCode);
+        if(airport != null) {
+            airports.add(airport);
+        }
+        return airport;
+    }
     /**
      * @return randomly calculated departure arrival dates
      */
@@ -174,6 +233,15 @@ public class FMSInitializerService {
         datePair[0] = new Date(originLong);
         datePair[1] = new Date(arrivalLong);
         return datePair;
+    }
+
+
+    private List<Aircraft> fetchOrCreateAircrafts() {
+        List<Aircraft> aircrafts = aircraftRepository.findAll();
+        if (aircrafts.isEmpty()) {
+            aircrafts = createAircrafts();
+        }
+        return aircrafts;
     }
 
 

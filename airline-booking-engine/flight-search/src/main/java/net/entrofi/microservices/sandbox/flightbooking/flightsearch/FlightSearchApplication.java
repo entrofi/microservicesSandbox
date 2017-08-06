@@ -36,16 +36,16 @@ public class FlightSearchApplication {
     }
 
 
-    @Bean
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        return connectionFactory;
-    }
-
-    @Bean
-    public AmqpAdmin amqpAdmin() {
-        return new RabbitAdmin(connectionFactory());
-    }
+//    @Bean
+//    public ConnectionFactory connectionFactory() {
+//        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+//        return connectionFactory;
+//    }
+//
+//    @Bean
+//    public AmqpAdmin amqpAdmin() {
+//        return new RabbitAdmin(connectionFactory());
+//    }
 
     @Bean
     public FanoutExchange flightExchange() {
