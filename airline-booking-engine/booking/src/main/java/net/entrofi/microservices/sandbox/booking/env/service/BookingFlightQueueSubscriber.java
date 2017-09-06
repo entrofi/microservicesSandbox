@@ -5,6 +5,7 @@ import net.entrofi.microservices.sandbox.booking.domain.model.Flight;
 import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import net.entrofi.microservices.sandbox.booking.domain.service.InventoryService;
 import net.entrofi.microservices.sandbox.booking.env.model.InboundFlightMessage;
+import net.entrofi.microservices.sandbox.booking.env.model.OutboundInventoryUpdateMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -20,6 +21,9 @@ public class BookingFlightQueueSubscriber {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private InventoryUpdatePublisher updatePublisher;
+
 
     @RabbitListener(queues = "#{flightQueue.name}")
     public void processNewFlights(InboundFlightMessage flightMessage) {
@@ -30,6 +34,7 @@ public class BookingFlightQueueSubscriber {
         flight.setOrigin(flightMessage.getOrigin());
         flight.setDestination(flightMessage.getDestination());
         Inventory inventory = inventoryService.save(flight, flightMessage.getCapacity());
+        updatePublisher.publishInventoryUpdate(inventory, OutboundInventoryUpdateMessage.UpdateType.FARE);
         LOGGER.debug("Created inventory: " +inventory);
     }
 

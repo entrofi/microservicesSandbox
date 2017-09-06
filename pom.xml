@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.entrofi.microservices.sandbox</groupId>
-    <artifactId>project-aggregator</artifactId>
+    <artifactId>microservices-project-aggregator</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>Sandbox Aggregator</name>

@@ -23,9 +23,10 @@ public class InventoryUpdatePublisher {
     private RabbitMessagingTemplate rabbitMessagingTemplate;
 
 
-    public void publishInventoryUpdate(Inventory inventory) {
+    public void publishInventoryUpdate(Inventory inventory, OutboundInventoryUpdateMessage.UpdateType type) {
         LOGGER.info("Publishing updates for inventory: " + inventory);
-        rabbitMessagingTemplate.convertAndSend(flightInventoryQueueName, new OutboundInventoryUpdateMessage(inventory));
+        rabbitMessagingTemplate.convertAndSend(flightInventoryQueueName,
+                new OutboundInventoryUpdateMessage(inventory, type));
         LOGGER.debug("Inventory update message");
     }
 }

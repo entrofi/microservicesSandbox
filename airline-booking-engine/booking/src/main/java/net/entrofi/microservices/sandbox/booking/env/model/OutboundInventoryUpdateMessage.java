@@ -10,13 +10,25 @@ public final class OutboundInventoryUpdateMessage {
     @JsonUnwrapped
     private final Inventory inventory;
 
+    private final UpdateType type;
 
-    public OutboundInventoryUpdateMessage(@JsonProperty("inventory") final Inventory inventory){
+
+    public OutboundInventoryUpdateMessage(@JsonProperty("inventory") final Inventory inventory,
+                                          @JsonProperty("type") final UpdateType type) {
         this.inventory = inventory;
+        this.type = type;
     }
 
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public UpdateType getType() {
+        return type;
+    }
+
+    public enum UpdateType {
+        FARE, BOOKING, ALL
     }
 }
