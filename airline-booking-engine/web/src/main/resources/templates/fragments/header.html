@@ -4,16 +4,16 @@
     <div th:fragment="header-include">
         <!-- header-include -->
         <link id="bs-css" rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-        <link id="bsdp-css" href="/js/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css"
-              rel="stylesheet"/>
         <link id="app-css" rel="stylesheet" th:href="@{/css/main.css}" href="/css/main.css" />
+        <link rel="stylesheet"
+              href="/js/eonasdan-bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css" />
 
         <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-
-        <script src="/js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-        <script src="/js/bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.min.js" charset="UTF-8"></script>
-
+        <!-- Include Date Range Picker -->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript"
+                src="/js/eonasdan-bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
     </div>
 </head>
 <body>
