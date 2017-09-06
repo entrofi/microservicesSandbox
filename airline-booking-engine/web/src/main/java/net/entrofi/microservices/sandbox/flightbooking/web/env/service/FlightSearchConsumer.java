@@ -62,6 +62,7 @@ public class FlightSearchConsumer {
         WebFlight webFlight = new WebFlight();
         webFlight.setAvailableSeats(flightSearchFlight.getAvailableSeats());
         webFlight.setDate(flightSearchFlight.getDate());
+        webFlight.setFare(flightSearchFlight.getFare());
 
         WebAirport.NameCodeParamWrapper destinationAirportParam = new WebAirport.NameCodeParamWrapper(flightSearchFlight
                 .getDestination().getName(), flightSearchFlight.getDestination().getCode());
