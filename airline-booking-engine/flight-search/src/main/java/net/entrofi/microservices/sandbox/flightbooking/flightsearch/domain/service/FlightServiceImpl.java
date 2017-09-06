@@ -8,11 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.time.ZoneOffset;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -41,13 +38,16 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void updateInventory(String flightNumber, Date flightDate, int availableSeats) {
+    public void updateInventory(String flightNumber, Date flightDate, int availableSeats, Double fare)
+            throws NoSuchFlightException  {
         Flight flight = flightRepository.findByDateAndFlightNumber(flightDate, flightNumber);
         if(flight == null ) {
             LOGGER.info("Unable to find flight with flight number: " + flightNumber + " on " + flightDate);
+            throw new NoSuchFlightException();
         } else {
             LOGGER.info("Updating available seats to " + availableSeats + " for flight " + flight.toString());
             flight.setAvailableSeats(availableSeats);
+            flight.setFare(fare);
             flightRepository.save(flight);
         }
     }
@@ -59,7 +59,9 @@ public class FlightServiceImpl implements FlightService {
         }
         List<Date> dates = new ArrayList<>(2);
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(referenceDate);
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        calendar.setTimeInMillis(referenceDate.getTime());
+
 
 
         dates.add(0, getDateForHourAndMins(referenceDate, 0, 0));
@@ -70,7 +72,8 @@ public class FlightServiceImpl implements FlightService {
 
     private Date getDateForHourAndMins(final Date referenceDate, final int hours, final int minutes) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(referenceDate);
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        calendar.setTimeInMillis(referenceDate.getTime());
 
         calendar.set(Calendar.HOUR_OF_DAY, hours);
         calendar.set(Calendar.MINUTE, minutes);

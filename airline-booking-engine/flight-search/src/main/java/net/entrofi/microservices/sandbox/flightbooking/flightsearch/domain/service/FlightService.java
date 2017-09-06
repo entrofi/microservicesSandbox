@@ -11,7 +11,8 @@ public interface FlightService {
 
     List<Flight> findAvailableFlights(FlightQuery flightQuery);
 
-    void updateInventory(String flightNumber, Date flightDate, int availableSeats);
+    void updateInventory(String flightNumber, Date flightDate, int availableSeats, Double fare) throws
+            NoSuchFlightException;
 
     Flight save(Flight flight);
 }
