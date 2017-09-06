@@ -37,10 +37,17 @@
             <div class="col-md-4">To</div>
             <div class="col-md-4" th:text="${flightDetails.destination.code} + ' - ' + ${flightDetails.destination.divisionName}">To</div>
         </div>
+        <div class="row">
+            <div class="col-md-4">Fare</div>
+            <div class="col-md-4" th:text="${#numbers.formatDecimal(flightDetails.fare, 3, 2)}">Fare
+            </div>
+        </div>
     </div>
 
     <p>
-        <button type="button" class="btn btn-primary">Book Flight</button>
+        <a th:href="@{/flights/book/{id}(id=${flightDetails.id})}"
+           class="btn btn-primary"
+        role="button">Book</a>
     </p>
 
 </div>

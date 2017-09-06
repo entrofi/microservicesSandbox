@@ -11,16 +11,18 @@
 <div th:replace="fragments/header :: header"></div>
 <!--Page content container -->
 <div class="container">
-    <form class="form-inline" id="flight-search-form"
+    <form class="form" id="flight-search-form"
           name="flight-search-form" method="post"
           th:action="@{/flights/search}" th:object="${flightSearchQuery}">
         <div class="well">
             <div class="row">
                 <div class="col-md-6 form-group" id="flight-search-date-container">
-                    <div class="input-group date">
-                        <input type="text" class="form-control" placeholder="Your flight date" th:field="*{date}">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        </input>
+                    <div class="input-group date" id="oneWayDatePicker">
+                        <label for="oneWayDatePicker">Flight Date:</label>
+                        <input type="text" class="form-control" placeholder="Your flight date" th:field="*{date}"/>
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
                     </div>
                 </div>
             </div>
@@ -50,7 +52,7 @@
                                     <tbody>
                                     <tr class="sucess">
                                         <td>
-                                            <a th:href="@{/flights/detail/{id}(id=${flight.id})}">
+                                            <a th:href="@{/flights/book/{id}(id=${flight.id})}">
                                                 <span class="glyphicon glyphicon-plane" th:text="${flight.flightNumber}"
                                                       aria-hidden="true">flight number</span>
                                             </a>
@@ -64,6 +66,10 @@
                                         </td>
                                         <td>
                                             <span th:text="${flight.destination.code + '-' + flight.destination.divisionName}"> destination</span>
+                                        </td>
+                                        <td>
+                                            <span th:text="${#numbers.formatDecimal(flight.fare, 3, 2)}">
+                                                fare</span>
                                         </td>
                                     </tr>
                                     </tbody>

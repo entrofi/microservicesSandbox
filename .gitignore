@@ -29,3 +29,5 @@ nbdist/
 flight-booking/kbms/mvnw
 hateoas/mvnw
 notification-service/mvnw
+airline-booking-engine/web/src/main/web-config/
+airline-booking-engine/init-scripts/

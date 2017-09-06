@@ -1,4 +1,4 @@
-package net.entrofi.microservices.sandbox.flightbooking.web.Controller;
+package net.entrofi.microservices.sandbox.flightbooking.web.controller;
 
 import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFlight;
 import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFlightSearchQuery;
@@ -35,11 +35,11 @@ public class WebFlightController {
         return "search-flight";
     }
 
-    @GetMapping(value = "/detail/{id}")
-    public String flightDetail(@PathVariable String id, Model model) {
-        WebFlight flightDetails = flightSearchConsumer.getFlightDetail(id);
-        model.addAttribute("flightDetails", flightDetails);
-        return "flight-details";
+    @GetMapping(value = "/book/{id}")
+    public String book(@PathVariable String id, Model model) {
+        WebFlight flight = flightSearchConsumer.getFlightDetail(id);
+        model.addAttribute("flight", flight);
+        return "book";
     }
 
 }
