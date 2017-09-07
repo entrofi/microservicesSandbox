@@ -1,6 +1,7 @@
 package net.entrofi.microservices.sandbox.booking.api.controller;
 
 import net.entrofi.microservices.sandbox.booking.api.resource.BookingRequest;
+import net.entrofi.microservices.sandbox.booking.app.helpers.InventoryIdHelper;
 import net.entrofi.microservices.sandbox.booking.domain.model.BookingRecord;
 import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import net.entrofi.microservices.sandbox.booking.domain.model.PassengerParam;
@@ -33,9 +34,15 @@ public class BookingRecordController implements RepositoryRestResourceExtensionC
 
     @PostMapping(name = "/book")
     public HttpEntity<Resource<BookingRecord>> book(@RequestBody BookingRequest bookingRequest) {
-        Inventory inventory = inventoryService.findByIdString(bookingRequest.getInventoryId());
+        final String flightId = InventoryIdHelper.convertFlightToString(bookingRequest.getFlight());
+        Inventory inventory = inventoryService.findByIdString(flightId);
+
         PassengerParam passenger = new PassengerParam(bookingRequest.getPassengerId(),
-                    bookingRequest.getPassengerName(), bookingRequest.getPassengerSurname());
+                bookingRequest.getPassengerName(),
+                bookingRequest.getPassengerSurname(),
+                bookingRequest.getEmail(),
+                bookingRequest.getPhoneNumber());
+
         BookingRecord bookingRecord = bookingRecordService.book(inventory, passenger,
                 bookingRequest.getFare(), bookingRequest.getBookingDate());
 

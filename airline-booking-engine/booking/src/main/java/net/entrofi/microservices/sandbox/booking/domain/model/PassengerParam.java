@@ -11,11 +11,20 @@ public final class PassengerParam {
 
     private final  String surname;
 
-    public PassengerParam(@NotNull final String passengerId,
-                          @NotNull final String name, @NotNull final String surname) {
+    private final String email;
+
+    private final String phoneNumber;
+
+    public PassengerParam(@NotNull String passengerId,
+                          @NotNull String name,
+                          @NotNull String surname,
+                          @NotNull String email,
+                          @NotNull String phoneNumber) {
         this.passengerId = passengerId;
         this.name = name;
         this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassengerId() {
@@ -28,5 +37,13 @@ public final class PassengerParam {
 
     public String getSurname() {
         return surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

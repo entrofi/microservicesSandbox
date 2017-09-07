@@ -1,6 +1,7 @@
 package net.entrofi.microservices.sandbox.booking.domain.service;
 
 
+import net.entrofi.microservices.sandbox.booking.app.helpers.PnrGenerator;
 import net.entrofi.microservices.sandbox.booking.domain.model.BookingRecord;
 import net.entrofi.microservices.sandbox.booking.domain.model.Inventory;
 import net.entrofi.microservices.sandbox.booking.domain.model.PassengerParam;
@@ -31,10 +32,13 @@ public class BookingRecordService {
         BookingRecord bookingRecord = new BookingRecord();
         bookingRecord.setName(passenger.getName());
         bookingRecord.setSurname(passenger.getSurname());
+        bookingRecord.setEmail(passenger.getEmail());
+        bookingRecord.setPhoneNumber(passenger.getPhoneNumber());
         bookingRecord.setPassengerId(passenger.getPassengerId());
         bookingRecord.setBookingDate(bookingDate);
         bookingRecord.setFare(fare);
         bookingRecord.setInventory(inventory);
+        bookingRecord.setPnr(PnrGenerator.generate(inventory.getFlight(), passenger));
         inventory.getBookings().add(bookingRecord);
         BookingRecord createdBooking = bookingRecordRepository.saveAndFlush(bookingRecord);
         LOGGER.info("Created boooking:" + createdBooking);

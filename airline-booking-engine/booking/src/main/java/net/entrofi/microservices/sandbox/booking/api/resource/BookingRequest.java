@@ -2,13 +2,17 @@ package net.entrofi.microservices.sandbox.booking.api.resource;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.entrofi.microservices.sandbox.booking.domain.model.Flight;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public final class BookingRequest {
 
-    private final String inventoryId;
+    private final Flight flight;
 
     private final String passengerId;
 
@@ -20,24 +24,26 @@ public final class BookingRequest {
 
     private final Double fare;
 
+    private final String email;
+
+    private final String phoneNumber;
+
     @JsonCreator
-    public BookingRequest(@JsonProperty("inventoryId")final String inventoryId,
-                          @JsonProperty("passengerId") final String passengerId,
-                          @JsonProperty("bookingDate")final Date bookingDate,
-                          @JsonProperty("passengerName")final String passengerName,
-                          @JsonProperty("passengerSurname")final String passengerSurname,
-                          @JsonProperty("fare")final Double fare) {
-        this.inventoryId = inventoryId;
-        this.passengerId = passengerId;
-        this.bookingDate = bookingDate;
-        this.passengerName = passengerName;
-        this.passengerSurname = passengerSurname;
-        this.fare = fare;
+    public BookingRequest(Map<String, Object> properties) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        this.flight = objectMapper.convertValue(properties.get("flight"), Flight.class);
+        this.passengerId = (String) properties.get("passengerId");
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+        this.bookingDate = objectMapper.convertValue(properties.get("bookingDate"), Date.class);
+        this.passengerName = (String) properties.get("passengerName");
+        this.passengerSurname = (String) properties.get("passengerSurname");
+        this.fare = Double.valueOf((String)properties.get("fare"));
+        this.email = (String) properties.get("email");
+        this.phoneNumber = (String) properties.get("phoneNumber");
     }
 
-
-    public String getInventoryId() {
-        return inventoryId;
+    public Flight getFlight() {
+        return flight;
     }
 
     public String getPassengerId() {
@@ -58,5 +64,13 @@ public final class BookingRequest {
 
     public Double getFare() {
         return fare;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
