@@ -2,6 +2,11 @@
 This project is a playground project for developing demos of microservices concepts using Spring stack. Following the
  commits you can see various applications of the concepts in practice. 
 
+ Some small chunks of concepts can be found by 
+ tags in the repository, other large group of concepts are given in releases. Contents of these are given in release 
+ notes of related to that release. You can find summary of release contents and links to release notes in 
+ ***[Releases](#releases)*** section below. 
+
 ## Running Services and Projects
 In order to run services, initially,  you need externalized (for now) instances of mongodb and rabbitmq running on you 
 system. 
@@ -57,3 +62,9 @@ You need to run services in the following order.
 - fms
 - flight-search
 - booking
+
+## Releases
+
+### v1.0.0
+Implementation and identification of basic service boundaries. Application of Spring Data Rest, Spring Hateoas, 
+Spring Data MongoDB, Spring Data JPA, and simple centralized configuration management using spring cloud config. 
