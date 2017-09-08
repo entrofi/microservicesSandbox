@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymealeaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TK Airlines</title>
+
+    <div th:replace="fragments/header :: header-include"/>
+    <script src="/js/app/book.js" type="text/javascript"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!--Page content container -->
+<div class="container">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Your Booking Details</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span
+                        th:text="${bookingRecord.passenger.title} + ' ' + ${bookingRecord.passenger.name} + ' ' + ${bookingRecord.passenger.surname}">Passenger</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Your PNR:</div>
+            <div class="col-md-4">
+                <span th:text="${bookingRecord.pnr}">Pnr</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Flight Number:</div>
+            <div class="col-md-4" th:text="${bookingRecord.flight.flightNumber}">flight number</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">Flight Date:</div>
+            <div class="col-md-4" th:text="${bookingRecord.flight.date}">Flight Date</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">From:</div>
+            <div class="col-md-4" th:text="${bookingRecord.flight.origin.code} + ' - ' + ${bookingRecord.flight.origin.divisionName}">From</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">To:</div>
+            <div class="col-md-4" th:text="${bookingRecord.flight.destination.code} + ' - ' + ${bookingRecord.flight.destination.divisionName}">To
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Fare:</div>
+            <div class="col-md-4" th:text="${#numbers.formatDecimal(bookingRecord.fare, 3, 2)}">Fare
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- @End page content container -->
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

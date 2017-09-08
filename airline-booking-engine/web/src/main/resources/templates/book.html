@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymealeaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TK Airlines</title>
+
+    <div th:replace="fragments/header :: header-include"/>
+    <script src="/js/app/book.js" type="text/javascript"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!--Page content container -->
+<form class="form" id="flight-booking-form"
+      name="flight-booking-form" method="post"
+      th:action="@{/flights/book}" th:object="${bookingInfo}">
+<div class="container">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-6">
+            <h3>Flight Details</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">Flight Number</div>
+            <div class="col-md-4" th:text="${bookingInfo.flight.flightNumber}">flight number</div>
+            <input type="hidden" th:field="${bookingInfo.flight.flightNumber}"/>
+            <input type="hidden" th:field="${bookingInfo.flight.id}"/>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">Flight Date</div>
+            <div class="col-md-4" th:text="${bookingInfo.flight.date}">Flight Date</div>
+            <input type="hidden" th:field="${bookingInfo.flight.date.time}"/>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">Available Seats</div>
+            <div class="col-md-4" th:text="${bookingInfo.flight.availableSeats}">Flight Date</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">From</div>
+            <div class="col-md-4" th:text="${bookingInfo.flight.origin.code} + ' - ' + ${bookingInfo.flight.origin.divisionName}">From</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">To</div>
+            <div class="col-md-4" th:text="${bookingInfo.flight.destination.code} + ' - ' + ${bookingInfo.flight.destination.divisionName}">To
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Fare</div>
+            <div class="col-md-4" th:text="${#numbers.formatDecimal(bookingInfo.flight.fare, 3, 2)}">Fare
+            </div>
+            <input type="hidden" th:field="${bookingInfo.flight.fare}"/>
+        </div>
+        <div class="row" id="collapseButtonRow">
+            <div class="col-md-2">
+                <button type="button"
+                        class="btn btn-primary"
+                        data-toggle="collapse" data-target="#bookingFormRow">Book
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="well  collapse" id="bookingFormRow">
+        <div class="row" th:if="${not #lists.isEmpty(bookingInfo.passengers)}"
+             th:each="passenger,stat : ${bookingInfo.passengers}">
+            <div class="col-md">
+                <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>Passenger Details</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="title" th:text="Title"></label>
+                                    <select class="form-control" name="title" id="title" th:field="${bookingInfo.passengers[__${stat.index}__].title}">
+                                        <option label="Mr" value="Mr">Mr</option>
+                                        <option label="Mrs" value="Mrs">Mrs</option>
+                                        <option label="Ms" value="Ms">Ms</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name" th:text="Name"></label>
+                                    <input class="form-control" name="name" id="name"
+                                           th:field="${bookingInfo.passengers[__${stat.index}__].name}"
+                                           type="text" placeholder="Your Name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="surname" th:text="Surname"></label>
+                                    <input id="surname" class="form-control"
+                                           th:field="${bookingInfo.passengers[__${stat.index}__].surname}"
+                                           type="text" placeholder="Your Family Name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="birthday" th:text="Birthday"></label>
+                                    <div class='input-group date' id='birthday'>
+                                        <input type='text' class="form-control" th:field="${bookingInfo.passengers[__${stat.index}__].birthday}"/>
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="passengerId" th:text="'Passport/Id Card'"></label>
+                                <input id="passengerId" class="form-control"
+                                       th:field="${bookingInfo.passengers[__${stat.index}__].passengerId}"
+                                       type="text"
+                                       placeholder="Enter your passport or local identification number"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-4">
+                                <h3>Contact Details</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="email" th:text="Email"></label>
+                                    <input name="email" id="email" class="form-control"
+                                           th:field="${bookingInfo.passengers[__${stat.index}__].email}"
+                                           type="text" placeholder="Your Email"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="phone" th:text="PhoneNumber"></label>
+                                    <input id="phone" class="form-control"
+                                           th:field="${bookingInfo.passengers[__${stat.index}__].phoneNumber}"
+                                           type="text" placeholder="Your Phone Number"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- @End page content container -->
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

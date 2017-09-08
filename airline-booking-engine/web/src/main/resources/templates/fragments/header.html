@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-include">
+        <!-- header-include -->
+        <link id="bs-css" rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+        <link id="app-css" rel="stylesheet" th:href="@{/css/main.css}" href="/css/main.css" />
+        <link rel="stylesheet"
+              href="/js/eonasdan-bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css" />
+
+        <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <!-- Include Date Range Picker -->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript"
+                src="/js/eonasdan-bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
+    </div>
+</head>
+<body>
+
+<div th:fragment="header">
+    <!-- page header -->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">TK Airlines</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/}">Home</a></li>
+                    <li class="active"><a th:href="@{/flights/search}">Flight Search</a></li>
+                    <li class="active"><a th:href="@{/flights/checkin}">Check-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>
