@@ -4,11 +4,11 @@ package net.entrofi.microservices.sandbox.booking.api.resource;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.entrofi.microservices.sandbox.booking.domain.model.Flight;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 public final class BookingRequest {
 
@@ -30,14 +30,17 @@ public final class BookingRequest {
 
     @JsonCreator
     public BookingRequest(Map<String, Object> properties) {
+
         ObjectMapper objectMapper = new ObjectMapper();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        objectMapper.setDateFormat(dateFormat);
         this.flight = objectMapper.convertValue(properties.get("flight"), Flight.class);
         this.passengerId = (String) properties.get("passengerId");
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
         this.bookingDate = objectMapper.convertValue(properties.get("bookingDate"), Date.class);
         this.passengerName = (String) properties.get("passengerName");
         this.passengerSurname = (String) properties.get("passengerSurname");
-        this.fare = Double.valueOf((String)properties.get("fare"));
+        this.fare = (Double)properties.get("fare");
         this.email = (String) properties.get("email");
         this.phoneNumber = (String) properties.get("phoneNumber");
     }

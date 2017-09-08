@@ -8,20 +8,20 @@ import net.entrofi.microservices.sandbox.booking.domain.model.PassengerParam;
 import net.entrofi.microservices.sandbox.booking.domain.service.BookingRecordService;
 import net.entrofi.microservices.sandbox.booking.domain.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.LinkBuilder;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapping;
 
 
-@RepositoryRestController
-@ExposesResourceFor(BookingRecord.class)
+@RestController
+@RequestMapping("/bookingRecords")
 public class BookingRecordController implements RepositoryRestResourceExtensionController{
 
     public static final String ROOT_REQUEST_MAPPING = "bookingRecords";
@@ -46,8 +46,9 @@ public class BookingRecordController implements RepositoryRestResourceExtensionC
         BookingRecord bookingRecord = bookingRecordService.book(inventory, passenger,
                 bookingRequest.getFare(), bookingRequest.getBookingDate());
 
-        Resource<BookingRecord> bookingRecordResource = new Resource<BookingRecord>(bookingRecord,
-                getBaseLink().slash(bookingRecord.getId()).withSelfRel());
+        Resource<BookingRecord> bookingRecordResource = new Resource<>(bookingRecord,
+                getBaseLink().slash(bookingRecord.getId()).withSelfRel(),
+                getBaseLink().slash(bookingRecord.getId()).slash("inventory").withRel("inventory"));
 
         return ResponseEntity.ok(bookingRecordResource);
     }
