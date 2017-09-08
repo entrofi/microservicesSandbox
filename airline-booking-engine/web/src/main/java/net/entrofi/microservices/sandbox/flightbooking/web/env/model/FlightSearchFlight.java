@@ -57,8 +57,7 @@ public class FlightSearchFlight {
         return destination;
     }
 
-    public void setDestination(
-            FlightSearchAirport destination) {
+    public void setDestination(FlightSearchAirport destination) {
         this.destination = destination;
     }
 
