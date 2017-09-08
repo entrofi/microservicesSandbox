@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.domain.model.Airport;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.model.KBMSAirport;
 import net.entrofi.microservices.sandbox.flightbooking.flightsearch.env.model.KBMSDivision;
+import net.entrofi.microservices.sandbox.utils.rest.RestTemplateFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -36,7 +37,7 @@ public class FSKBMSConsumerService {
     private RestTemplate restTemplate;
 
     public FSKBMSConsumerService() {
-        this.restTemplate = getRestTemplateWithHalMessageConverter();
+        this.restTemplate = RestTemplateFactory.getRestTemplateWithHalMessageConverter();
     }
 
     public Airport findAirportByCode(String airportCode) {
@@ -78,23 +79,4 @@ public class FSKBMSConsumerService {
         return kbmsDivision;
     }
 
-    private static RestTemplate getRestTemplateWithHalMessageConverter() {
-        RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> existingConverters = restTemplate.getMessageConverters();
-        List<HttpMessageConverter<?>> newConverters = new ArrayList<>();
-        newConverters.add(getHalMessageConverter());
-        newConverters.addAll(existingConverters);
-        restTemplate.setMessageConverters(newConverters);
-        return restTemplate;
-    }
-
-    private static HttpMessageConverter getHalMessageConverter() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new Jackson2HalModule());
-        MappingJackson2HttpMessageConverter halConverter =
-                new TypeConstrainedMappingJackson2HttpMessageConverter(ResourceSupport.class);
-        halConverter.setSupportedMediaTypes(Arrays.asList(MediaTypes.HAL_JSON));
-        halConverter.setObjectMapper(objectMapper);
-        return halConverter;
-    }
 }
