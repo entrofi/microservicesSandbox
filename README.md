@@ -65,6 +65,6 @@ You need to run services in the following order.
 
 ## Releases
 
-### v1.0.0
+### [v1.0.0](/release_notes/v1.0.x.md)
 Implementation and identification of basic service boundaries. Application of Spring Data Rest, Spring Hateoas, 
 Spring Data MongoDB, Spring Data JPA, and simple centralized configuration management using spring cloud config. 
