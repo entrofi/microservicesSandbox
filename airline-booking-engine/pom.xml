@@ -83,5 +83,6 @@
         <module>fms</module>
         <module>web</module>
         <module>utils</module>
+        <module>registry-server-eureka</module>
     </modules>
 </project>
