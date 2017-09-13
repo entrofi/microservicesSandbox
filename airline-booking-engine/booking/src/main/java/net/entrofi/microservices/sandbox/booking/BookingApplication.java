@@ -18,9 +18,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class BookingApplication implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingApplication.class);
