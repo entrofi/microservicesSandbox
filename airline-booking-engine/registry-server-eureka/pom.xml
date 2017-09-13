@@ -9,12 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.entrofi.microservices.sandbox.flightbooking</groupId>
-    <artifactId>config-server</artifactId>
-
-    <name>Flight Booking Config Server</name>
-    <description>Flight Booking Configuration Server</description>
-
+    <artifactId>registry-server-eureka</artifactId>
+    <name>Euroka Service Registry</name>
+    <description>Service registry with netflix euroka</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -29,7 +26,6 @@
             </plugin>
         </plugins>
     </build>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -49,13 +45,24 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 </project>
