@@ -50,7 +50,7 @@ public class FlightQueuesSubscriber {
      *
      */
     @RabbitListener(queues = "${net.entrofi.microservices.sandbox.booking.flightInventoryQueueName}")
-    public void processFlightInventoryStatus(InboundInventoryUpdateMessage inventoryUpdateMessage)
+    public synchronized void processFlightInventoryStatus(InboundInventoryUpdateMessage inventoryUpdateMessage)
             throws NoSuchFlightException{
         LOGGER.info("Processing inventory update mesasge for flight availability: " + inventoryUpdateMessage);
         flightService.updateInventory(inventoryUpdateMessage.getFlight().getFlightNumber(),

@@ -1,6 +1,7 @@
 package net.entrofi.microservices.sandbox.flightbooking.flightsearch;
 
 
+import net.entrofi.microservices.sandbox.utils.rest.RestTemplateFactory;
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -14,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 
 @SpringBootApplication
@@ -59,8 +62,7 @@ public class FlightSearchApplication {
     @Bean
     public Binding flightExchangeBinding(@Autowired FanoutExchange flightExchange,
                                          @Autowired Queue flightQueue) {
-        Binding binding = BindingBuilder.bind(flightQueue).to(flightExchange);
-        return binding;
+        return  BindingBuilder.bind(flightQueue).to(flightExchange);
     }
 
     @Bean
@@ -80,4 +82,10 @@ public class FlightSearchApplication {
         return new Jackson2JsonMessageConverter();
     }
 
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return RestTemplateFactory.getRestTemplateWithHalMessageConverter();
+    }
 }
