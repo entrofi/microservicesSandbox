@@ -6,7 +6,7 @@ import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFligh
 import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFlightSearchQuery;
 import net.entrofi.microservices.sandbox.flightbooking.web.env.model.FlightSearchFlight;
 import net.entrofi.microservices.sandbox.flightbooking.web.env.model.FlightSearchFlightQuery;
-import net.entrofi.microservices.sandbox.utils.rest.RestTemplateFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -21,15 +21,10 @@ import java.util.stream.Collectors;
 public class FlightSearchConsumer {
 
 
-    private static final String FLIGHT_SEARCH_URL = "http://localhost:8090";
+    private static final String FLIGHT_SEARCH_URL = "http://FLIGHT-SEARCH";
 
-    private final RestTemplate restTemplate;
-
-
-    public FlightSearchConsumer() {
-        this.restTemplate = RestTemplateFactory.getRestTemplateWithHalMessageConverter();
-    }
-
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     public List<WebFlight> findFlights(WebFlightSearchQuery webFlightSearchFlightQuery) {
