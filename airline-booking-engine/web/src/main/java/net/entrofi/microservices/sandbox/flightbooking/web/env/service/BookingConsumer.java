@@ -7,7 +7,6 @@ import net.entrofi.microservices.sandbox.flightbooking.web.domain.model.WebFligh
 import net.entrofi.microservices.sandbox.flightbooking.web.env.model.BookingBookingRecord;
 import net.entrofi.microservices.sandbox.flightbooking.web.env.model.BookingBookingRequest;
 import net.entrofi.microservices.sandbox.flightbooking.web.env.model.BookingFlight;
-import net.entrofi.microservices.sandbox.utils.rest.RestTemplateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -28,16 +27,13 @@ import java.util.TimeZone;
 public class BookingConsumer {
 
     @Value("${net.entrofi.microservices.sandbox.booking.endpoint}")
-    private String bookingEndPoint = "http://localhost:8010";
+    private String bookingEndPoint = "http://BOOKING";
 
+    @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
     private FlightSearchConsumer flightSearchConsumer;
-
-    public BookingConsumer() {
-        this.restTemplate =  RestTemplateFactory.getRestTemplateWithHalMessageConverter();
-    }
 
     public WebBookingRecord book(WebBookingInfo bookingInfo) {
         WebFlight flight = flightSearchConsumer.getFlightDetail(bookingInfo.getFlight().getId());
@@ -49,9 +45,7 @@ public class BookingConsumer {
                 requestEntity,
                 new ParameterizedTypeReference<BookingBookingRecord>() { });
         BookingBookingRecord bookingRecord = responseEntity.getBody();
-        WebBookingRecord webBookingRecord = getWebBookingRecord(flight, bookingRecord);
-
-        return webBookingRecord ;
+        return getWebBookingRecord(flight, bookingRecord);
     }
 
     private BookingBookingRequest getBookingBookingRequest(WebBookingInfo bookingInfo, WebFlight flight) {
