@@ -3,9 +3,9 @@ package net.entrofi.microservices.sandbox.fms.env.service;
 
 import net.entrofi.microservices.sandbox.fms.env.model.Airport;
 import net.entrofi.microservices.sandbox.fms.env.model.BaseServiceListResponse;
-import net.entrofi.microservices.sandbox.utils.rest.RestTemplateFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,14 +16,10 @@ public class FMSKBMSConsumerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FMSKBMSConsumerService.class);
 
-    private static final String KBMS_ENDPOINT = "http://localhost:8070";
+    private static final String KBMS_ENDPOINT = "http://KBMS";
 
+    @Autowired
     private RestTemplate restTemplate;
-
-    public FMSKBMSConsumerService() {
-        this.restTemplate = RestTemplateFactory.getRestTemplateWithHalMessageConverter();
-    }
-
 
     public List<Airport> getAirports() {
         //TODO change this call to exchange with parameterizedtyperef...
