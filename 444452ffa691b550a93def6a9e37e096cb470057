@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "511e29d5_2aff1441",
+        "filename": "airline-booking-engine/kbms/src/test/java/net/entrofi/microservices/sandbox/KBMSApplicationTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1009972
+      },
+      "writtenOn": "2017-09-21T12:08:00Z",
+      "side": 1,
+      "message": "redundant space",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 5
+      },
+      "revId": "444452ffa691b550a93def6a9e37e096cb470057",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
