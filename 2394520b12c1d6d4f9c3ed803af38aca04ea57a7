@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67fe18b4_d714f9e0",
+        "filename": "airline-booking-engine/kbms/src/test/java/net/entrofi/microservices/sandbox/KBMSApplicationTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1012414
+      },
+      "writtenOn": "2017-09-21T11:56:41Z",
+      "side": 1,
+      "message": "Boyle inline comment olmamasi lazim",
+      "revId": "2394520b12c1d6d4f9c3ed803af38aca04ea57a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
