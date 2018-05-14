@@ -23,12 +23,13 @@ MongoDB is used by only ***flight-search*** module currently. Corresponding ccon
  1. **bom:** The bill of materials module for others
  2. **airline-booking-engine:** Project aggregator module for the actual application. 
      1. ***config-server:*** Spring config server for externalized configuration management
-     2. ***kbms:*** Knowledge Base Management Service is the service which holds and serves static data like airports, 
+     2. ***registry-server-eureka:*** Service registry server cluster which uses Netflix Eureka
+     3. ***kbms:*** Knowledge Base Management Service is the service which holds and serves static data like airports, 
      countries, divisions etc. 
-     3. ***fms:*** Flight Management Service is the service for core flight management. 
-     4. ***flight-search:*** Flight Search Service is the service for searching flights.
-     5. ***booking:*** Inventory and booking management service. 
-     6. ***web:*** User interface.
+     4. ***fms:*** Flight Management Service is the service for core flight management. 
+     5. ***flight-search:*** Flight Search Service is the service for searching flights.
+     6. ***booking:*** Inventory and booking management service. 
+     7. ***web:*** User interface.
  
 
 ### Service Configurations
@@ -48,6 +49,7 @@ management.security.enabled=false
 #### Useful Configuration Parameters for Other services
 **Ports listened by services:**
 - config-server port: 8888
+- registry-server-eureka: 878x (8781 and 8782 is available for current configuration)
 - kbms port: 8070
 - fms port: 8080
 - booking port: 8010
@@ -58,6 +60,7 @@ management.security.enabled=false
 ### Running order for demos
 You need to run services in the following order. 
 - config-server
+- registry-server-eureka
 - kbms
 - fms
 - flight-search
