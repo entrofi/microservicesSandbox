@@ -20,6 +20,7 @@
         <org.springframework.version>4.2.1.RELEASE</org.springframework.version>
         <aspectjweaver.version>1.8.2</aspectjweaver.version>
         <spring-data-jpa.version>1.11.3.RELEASE</spring-data-jpa.version>
+        <spring-security-oauth2.version>[2.0.16,)</spring-security-oauth2.version>
         <cglib.version>2.2</cglib.version>
         <mysql-connector-java.version>5.1.9</mysql-connector-java.version>
         <hibernate.version>4.3.8.Final</hibernate.version>
@@ -35,7 +36,7 @@
         <jsr181-api.version>1.0-MR1</jsr181-api.version>
         <org.apache.cxf.version>.7.15</org.apache.cxf.version>
         <org.apache.commons.commons-lang3.version>3.5</org.apache.commons.commons-lang3.version>
-        <jackson.core.version>2.8.5</jackson.core.version>
+        <jackson.core.version>2.8.11.3</jackson.core.version>
         <c3p0.driver>0.9.2</c3p0.driver>
         <ojdbc6.version>11.2.0.1.0</ojdbc6.version>
         <mockito.version>1.9.5</mockito.version>
@@ -120,6 +121,11 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring-data-jpa.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring-security-oauth2.version}</version>
             </dependency>
             <!-- Spring Test Artifacts -->
             <dependency>
