@@ -71,7 +71,7 @@ You need to run services in the following order.
 ### [v1.0.x Basics](/release_notes/v1.0.x.md)
 Implementation and identification of basic service boundaries. Application of Spring Data Rest, Spring Hateoas, 
 Spring Data MongoDB, Spring Data JPA, and simple centralized configuration management using spring cloud config.
- ### [v1.1.x Service Discovery](/release_notes/v1.1.x) 
+ ### [v1.1.x Service Discovery](/release_notes/v1.1.x.md) 
 In order to achieve high availability in a production environment a service needs to be deployed at least with two 
 instances. When the number is under control as in most of the distributed SOA cases client-to-service or service-to 
 service calls can be handled using pre-configured service location parameters. However, for a microservices-based 
