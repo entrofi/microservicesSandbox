@@ -17,8 +17,8 @@
     <properties>
         <apt-maven-plugin.version>1.1.2</apt-maven-plugin.version>
         <querydsl.version>3.6.6</querydsl.version>
-        <spring-boot.version>1.5.2.RELEASE</spring-boot.version>
-
+        <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <working.dir>${project.basedir}</working.dir>
     </properties>
 
@@ -126,7 +126,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Dalston.SR3</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -184,7 +184,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!-- persistence -->
         <dependency>

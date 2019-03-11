@@ -30,7 +30,7 @@ public class InventoryService {
     public Inventory findByIdString(String flightString) {
        Inventory inventory = null;
         try{
-           inventory = inventoryRepository.findOne(InventoryIdHelper.convertFlightFromIATAString(flightString));
+           //inventory = inventoryRepository.findOne(InventoryIdHelper.convertFlightFromIATAString(flightString));
        }catch (IllegalArgumentException iae) {
             LOGGER.warn("Invalid flight string repesentation provided for finding flight: " + flightString, iae);
         }
